@@ -6,6 +6,7 @@ def mainPage():
 
     while(kbInput != "1" and kbInput != "2" and kbInput != "3"):
         print("")
+        print("--------------------------------------------------------")
         print("InCollege")
         print("Main page")
         print(" Enter page you want to go to: ")
@@ -17,7 +18,7 @@ def mainPage():
         elif(kbInput == "3"):
             jobSearchPage()
         else:
-            print("Please enter an available option")
+            print("Please enter an available option!!\n")
 
 
 def peopleSearchPage():
@@ -28,6 +29,7 @@ def skillsPage():
 
     while(kbInput != "1" and kbInput != "2" 
         and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
+        print("--------------------------------------------------------")
         print("Available skills to learn:")
         print("Enter the Coressponding Number with a skill to learn it today:")
         print(" 1. LeaderShip")
@@ -45,6 +47,7 @@ def skillsPage():
     if(kbInput == "b"):
         mainPage()
     
+    
     pageUnderConstruction()
     
 
@@ -53,5 +56,7 @@ def jobSearchPage():
 
 def pageUnderConstruction():
     print("")
+    print("--------------------------------------------------------")
     print("Page under construction")
+
 
