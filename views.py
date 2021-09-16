@@ -1,25 +1,57 @@
-#call after successfully login
+#call after successfully login:
+
 def mainPage():
-    print("Hello:")
-    print("Enter page you want to go to: ")
-    a = input("1 to search for people you know, 2 for learn new skills, 3 for search for job")
-    if( a == '1'):
-        peopleSearchPage()
-    elif(a == '2'):
-        skillsPage()
-    elif( a == '3'):
-        jobSearchPage()
+
+    kbInput = "4"
+
+    while(kbInput != "1" and kbInput != "2" and kbInput != "3"):
+        print("")
+        print("InCollege")
+        print("Main page")
+        print(" Enter page you want to go to: ")
+        kbInput = input("   1 to find someone you know, 2 for learn new skills, 3 for search for job\n")
+        if(kbInput == "1"):
+            peopleSearchPage()
+        elif(kbInput == "2"):
+            skillsPage()
+        elif(kbInput == "3"):
+            jobSearchPage()
+        else:
+            print("Please enter an available option")
 
 
 def peopleSearchPage():
-    print("Page under construction")
+    pageUnderConstruction()
 
 def skillsPage():
-    print("Page under construction")
+    kbInput = "6"
+
+    while(kbInput != "1" and kbInput != "2" 
+        and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
+        print("Available skills to learn:")
+        print("Enter the Coressponding Number with a skill to learn it today:")
+        print(" 1. LeaderShip")
+        print(" 2. Basic programming in Python")
+        print(" 3. Make an outstanding resume")
+        print(" 4. Professional writing")
+        print(" 5. Microsoft Excel basics")
+        kbInput = input(" Or enter b for return to mainPage\n")
+
+        if(kbInput != "1" and kbInput != "2" 
+        and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
+            print("Please enter the available options")
+    
+
+    if(kbInput == "b"):
+        mainPage()
+    
+    pageUnderConstruction()
+    
 
 def jobSearchPage():
+    pageUnderConstruction()
+
+def pageUnderConstruction():
+    print("")
     print("Page under construction")
 
-#from 3 above options
-def backToMainPage():
-    print("Page under construction")
