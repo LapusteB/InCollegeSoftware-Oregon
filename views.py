@@ -8,6 +8,7 @@ def mainPage():
         print("")
         print("--------------------------------------------------------")
         print("InCollege")
+        print("--------------------------------------------------------")
         print("Main page")
         print(" Enter page you want to go to: ")
         kbInput = input("   1 to find someone you know, 2 for learn new skills, 3 for search for job\n")

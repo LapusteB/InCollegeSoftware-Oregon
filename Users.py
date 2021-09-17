@@ -31,7 +31,7 @@ def register():
 
  #Checks if there are already 5 accounts made this way
     for line in open("usernames.txt", "r"): count += 1 
-    if count == 5:
+    if count == 5 or count > 5:
         print("All permitted accounts have been created, please come backlater")
         home('')
 
@@ -44,8 +44,15 @@ def register():
 
     file.write(u + "\n")
 
+    #PROMPT PASSWORDS HERE...
+
 
 def login(user):
+    print("--------------------------")
+    print("InCollege Login")
+    print("--------------------------")
+    u = input("Username: ")
+    p = input("Password: ")
     mainPage()
     #TO DO
 
