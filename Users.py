@@ -32,7 +32,7 @@ def register():
  #Checks if there are already 5 accounts made this way
     for line in open("usernames.txt", "r"): count += 1 
     if count == 5:
-        print("Error, No more than 5 Users registered at 1 time.")
+        print("All permitted accounts have been created, please come backlater")
         home('')
 
  #Checks if there is a duplicate username
