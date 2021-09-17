@@ -1,3 +1,6 @@
+from views import mainPage
+from validatePass import validatePass
+
 class User:
 
     def __init__(self, name, username, password):
@@ -18,14 +21,20 @@ def home(user):
         print("Choose a valid option")
         home('')
 
-
+#'r'- open a file for reading, 'w' - open a file for writing, '+' open a file for reading and writing
 def register():
-    print('Register function')
+    print("-----------------------------")
+    print("Welcome to the InCollege App!")
+    print("-----------------------------")
+    u = input("Please enter a unique username: ")
+    file = open("dataBase.txt", "w")
+    file.write(u)
+    
     #TO DO
 
 
 def login(user):
-    print("Login Function")
+    mainPage()
     #TO DO
 
 
