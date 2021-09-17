@@ -26,9 +26,10 @@ def register():
     print("-----------------------------")
     print("Welcome to the InCollege App!")
     print("-----------------------------")
+    
     u = input("Please enter a unique username: ")
-    file = open("dataBase.txt", "w")
-    file.write(u)
+    file = open("dataBase.txt", "a") # - file will be created if not present
+    file.write(u + "\n")
     
     #TO DO
 
