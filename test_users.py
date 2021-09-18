@@ -5,19 +5,6 @@ input_values = []
 print_values = []
 
 
-def test_register():
-    set_keyboard_input(["register", "Tester"])
-    home("")
-    output = get_display_output()
-    assert output == ["Please type either: 'Login' or 'Register",
-                      "What would you like to do: "
-                      "-----------------------------",
-                      "Welcome to the InCollege App!",
-                      "-----------------------------",
-                      "Please enter a unique username: ",
-                      "Error, Username already created! Returning home"]
-
-
 def test_login_correct():
     set_keyboard_input(["login", "Tester", "Feg4%6&ff", "3"])
     home('')
