@@ -9,7 +9,7 @@ def test_jobSearch():
     mainPage()
     output = get_display_output()
     assert output == [ "", "--------------------------------------------------------",
-        "InCollege","Main page"," Enter page you want to go to: ",
+        "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
          "", "--------------------------------------------------------","Page under construction"]
 
@@ -18,7 +18,7 @@ def test_findSomeone():
     mainPage()
     output = get_display_output()
     assert output == [ "", "--------------------------------------------------------",
-        "InCollege","Main page"," Enter page you want to go to: ",
+        "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
          "", "--------------------------------------------------------","Page under construction"]
 
@@ -27,7 +27,7 @@ def test_learnSkills():
     mainPage()
     output = get_display_output()
     assert output == [ "", "--------------------------------------------------------",
-        "InCollege","Main page"," Enter page you want to go to: ",
+        "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
         "--------------------------------------------------------",
         "Available skills to learn:", 
@@ -43,7 +43,7 @@ def test_learnSkills_main():
     mainPage()
     output = get_display_output()
     assert output == ["", "--------------------------------------------------------",
-        "InCollege","Main page"," Enter page you want to go to: ",
+        "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
         "--------------------------------------------------------",
         "Available skills to learn:", 
@@ -52,7 +52,7 @@ def test_learnSkills_main():
         " 3. Make an outstanding resume", " 4. Professional writing",
         " 5. Microsoft Excel basics", " Or enter b for return to mainPage\n",
         "", "--------------------------------------------------------",
-        "InCollege","Main page"," Enter page you want to go to: ",
+        "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
          "", "--------------------------------------------------------","Page under construction",
          "", "--------------------------------------------------------","Page under construction" ]
