@@ -40,6 +40,7 @@ def test_login_correct():
                       "--------------------------------------------------------",
                       "Page under construction"]
 
+
 def test_login_incorrect_username():
     set_keyboard_input(["login", "incorrect", "Tester", "Feg4%6&ff", "3"])
     home('')
@@ -88,6 +89,7 @@ def test_login_incorrect_password():
                       '',
                       "--------------------------------------------------------",
                       "Page under construction"]
+
 
 def mock_input(s):
     print_values.append(s)
