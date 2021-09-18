@@ -1,6 +1,7 @@
 from views import mainPage
 from validatePass import validatePass
 
+
 class User:
 
     def __init__(self, name, username, password):
@@ -13,38 +14,40 @@ class User:
 def home(user):
     print("Please type either: 'Login' or 'Register")
     a = input("What would you like to do: ")
-    if(a == "register" or a == "Register"):
+    if (a == "register" or a == "Register"):
         register()
-    elif(a == "Login" or a == "login"):
+    elif (a == "Login" or a == "login"):
         login(user)
     else:
         print("Choose a valid option")
         home('')
 
-#'r'- open a file for reading, 'w' - open a file for writing, '+' open a file for reading and writing
+
+# 'r'- open a file for reading, 'w' - open a file for writing, '+' open a file for reading and writing
 def register():
     print("-----------------------------")
     print("Welcome to the InCollege App!")
     print("-----------------------------")
-    file = open("usernames.txt", "a") # - file will be created if not present
-    file2 = open("passwords.txt", "a") # - file will be created if not present
+    file = open("usernames.txt", "a")  # - file will be created if not present
+    file2 = open("passwords.txt", "a")  # - file will be created if not present
     count = 0
 
- #Checks if there are already 5 accounts made this way
-    for line in open("usernames.txt", "r"): count += 1 
+    # Checks if there are already 5 accounts made this way
+    for line in open("usernames.txt", "r"): count += 1
     if count == 5 or count > 5:
         print("All permitted accounts have been created, please come backlater")
         home('')
 
- #Checks if there is a duplicate username
+    # Checks if there is a duplicate username
     u = input("Please enter a unique username: ")
-    with open('usernames.txt') as f: 
+    with open('usernames.txt') as f:
         if u in f.read():
             print("Error, Username already created! Returning home")
             home('')
 
     file.write(u + "\n")
-    print("Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
+    print(
+        "Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
     p = input("Please enter a unique password: ")
     with open('passwords.txt') as f:
         if p in f.read():
@@ -53,16 +56,16 @@ def register():
     res = validatePass(p)
     print(res)
     while res is False:
-            if res is False:
-                print("Error, Please meet password requirements:")
-                print("---------------------------------------------")
-                print("-minimum of 8 characters")
-                print("-maximum of 12 characters")
-                print("-at least one capital letter")
-                print("-one digit, one non-alpha character")
-                print("---------------------------------------------")
-            p = input("Re-enter Password: ")
-            res = validatePass(p)
+        if res is False:
+            print("Error, Please meet password requirements:")
+            print("---------------------------------------------")
+            print("-minimum of 8 characters")
+            print("-maximum of 12 characters")
+            print("-at least one capital letter")
+            print("-one digit, one non-alpha character")
+            print("---------------------------------------------")
+        p = input("Re-enter Password: ")
+        res = validatePass(p)
     file2.write(p + "\n")
     file.close()
     file2.close()
@@ -71,7 +74,7 @@ def register():
     print("Entering main page....")
     mainPage()
 
-  
+
 def login(user):
     print("--------------------------")
     print("InCollege Login")
@@ -85,7 +88,7 @@ def login(user):
             u = True
         else:
             flag = False
-            
+
             while flag == False:
                 with open('usernames.txt') as f:
                     if u in f.read():
@@ -112,7 +115,8 @@ def login(user):
             p = input("Enter password: ")
             if validatePass(p):
                 break
-    mainPage()
+        mainPage()
 
-        
-home('')
+
+if __name__ == "__home('')__":
+    home('')
