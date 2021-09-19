@@ -1,6 +1,4 @@
-from Users import home
-from Users import has_max_users
-from Users import username_exists
+import login
 import builtins
 
 input_values = []
@@ -9,12 +7,10 @@ print_values = []
 
 # Tests login with correct input
 def test_login_correct():
-    set_keyboard_input(["login", "Tester", "Feg4%6&ff", "3"])
-    home('')
+    set_keyboard_input(["Tester", "Feg4%6&ff", "3"])
+    login.login()
     output = get_display_output()
-    assert output == ["Please type either: 'Login' or 'Register",
-                      "What would you like to do: ",
-                      "--------------------------",
+    assert output == ["--------------------------",
                       "InCollege Login",
                       "--------------------------",
                       "Username: ",
@@ -33,12 +29,10 @@ def test_login_correct():
 
 # Tests login with incorrect username
 def test_login_incorrect_username():
-    set_keyboard_input(["login", "incorrect", "Tester", "Feg4%6&ff", "3"])
-    home('')
+    set_keyboard_input(["incorrect", "Tester", "Feg4%6&ff", "3"])
+    login.login()
     output = get_display_output()
-    assert output == ["Please type either: 'Login' or 'Register",
-                      "What would you like to do: ",
-                      "--------------------------",
+    assert output == ["--------------------------",
                       "InCollege Login",
                       "--------------------------",
                       "Username: ",
@@ -59,12 +53,10 @@ def test_login_incorrect_username():
 
 # Tests login with incorrect password
 def test_login_incorrect_password():
-    set_keyboard_input(["login", "Tester", "52FG3f%^dd", "Feg4%6&ff", "3"])
-    home('')
+    set_keyboard_input(["Tester", "52FG3f%^dd", "Feg4%6&ff", "3"])
+    login.login()
     output = get_display_output()
-    assert output == ["Please type either: 'Login' or 'Register",
-                      "What would you like to do: ",
-                      "--------------------------",
+    assert output == ["--------------------------",
                       "InCollege Login",
                       "--------------------------",
                       "Username: ",
@@ -86,36 +78,34 @@ def test_login_incorrect_password():
 # Test for max users in username file.
 # Must manually adjust number of users in file to >= 5 before test.
 def test_has_max_users():
-    assert has_max_users()
+    assert login.has_max_users()
 
 
 # Test for less <5 users in username file
 # Must manually adjust number of users in file to < 5 before test.
 def test_has_not_max_users():
-    assert has_max_users() == False
+    assert login.has_max_users() == False
 
 
 # Tests if username exists in username file.
 # Tester is defaulted in this file.
 def test_username_exists():
-    assert username_exists("Tester")
+    assert login.username_exists("Tester")
 
 
 # Tests if username does not exist in username file
 # Not Tester cannot be created in username file for testing purposes
 def test_username_not_exists():
-    assert username_exists("Not Tester") == False
+    assert login.username_exists("Not Tester") == False
 
 
 # Tests a correct register of a user
 # This assumes that there is not already a max amount of users
 def test_register():
-    set_keyboard_input(["register", "Another Tester", "Abcdefg1!", "3"])
-    home('')
+    set_keyboard_input(["Another Tester", "Abcdefg1!", "3"])
+    login.register()
     output = get_display_output()
-    assert output == ["Please type either: 'Login' or 'Register",
-                      "What would you like to do: ",
-                      "-----------------------------",
+    assert output == ["-----------------------------",
                       "Welcome to the InCollege App!",
                       "-----------------------------",
                       "Please enter a unique username: ",
