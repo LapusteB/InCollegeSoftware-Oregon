@@ -11,16 +11,16 @@ class User:
         self.loggedIn = True
 
 
-def home(user):
+def home():
     print("Please type either: 'Login' or 'Register")
     a = input("What would you like to do: ")
     if (a == "register" or a == "Register"):
         register()
     elif (a == "Login" or a == "login"):
-        login(user)
+        login()
     else:
         print("Choose a valid option")
-        home('')
+        home()
 
 
 # 'r'- open a file for reading, 'w' - open a file for writing, '+' open a file for reading and writing
@@ -33,13 +33,13 @@ def register():
 
     # Checks if there are already 5 accounts made this way
     if has_max_users():
-        home('')
+        home()
 
     # Checks if there is a duplicate username
     u = input("Please enter a unique username: ")
     if username_exists(u):
         print("Error, Username already created! Returning home")
-        home('')
+        home()
 
     file.write(u + "\n")
     print("Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
@@ -69,7 +69,7 @@ def register():
     mainPage()
 
 
-def login(user):
+def login():
     print("--------------------------")
     print("InCollege Login")
     print("--------------------------")
@@ -142,7 +142,7 @@ def username_exists(u):
         return False
 
 
-if __name__ == "__home('')__":
-    home('')
+#if __name__ == "__home('')__":
+#    home('')
 
-home('')
+home()
