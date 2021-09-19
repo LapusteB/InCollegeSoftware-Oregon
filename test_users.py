@@ -1,10 +1,13 @@
 from Users import home
+from Users import has_max_users
+from Users import username_exists
 import builtins
 
 input_values = []
 print_values = []
 
 
+# Tests login with correct input
 def test_login_correct():
     set_keyboard_input(["login", "Tester", "Feg4%6&ff", "3"])
     home('')
@@ -28,6 +31,7 @@ def test_login_correct():
                       "Page under construction"]
 
 
+# Tests login with incorrect username
 def test_login_incorrect_username():
     set_keyboard_input(["login", "incorrect", "Tester", "Feg4%6&ff", "3"])
     home('')
@@ -53,6 +57,7 @@ def test_login_incorrect_username():
                       "Page under construction"]
 
 
+# Tests login with incorrect password
 def test_login_incorrect_password():
     set_keyboard_input(["login", "Tester", "52FG3f%^dd", "Feg4%6&ff", "3"])
     home('')
@@ -66,6 +71,58 @@ def test_login_incorrect_password():
                       "Password: ",
                       "Error, Incorrect password",
                       "Enter password: ",
+                      '',
+                      "--------------------------------------------------------",
+                      "InCollege",
+                      "--------------------------------------------------------",
+                      "Main page",
+                      " Enter page you want to go to: ",
+                      "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
+                      '',
+                      "--------------------------------------------------------",
+                      "Page under construction"]
+
+
+# Test for max users in username file.
+# Must manually adjust number of users in file to >= 5 before test.
+def test_has_max_users():
+    assert has_max_users()
+
+
+# Test for less <5 users in username file
+# Must manually adjust number of users in file to < 5 before test.
+def test_has_not_max_users():
+    assert has_max_users() == False
+
+
+# Tests if username exists in username file.
+# Tester is defaulted in this file.
+def test_username_exists():
+    assert username_exists("Tester")
+
+
+# Tests if username does not exist in username file
+# Not Tester cannot be created in username file for testing purposes
+def test_username_not_exists():
+    assert username_exists("Not Tester")
+
+
+# Tests a correct register of a user
+# This assumes that there is not already a max amount of users
+def test_register():
+    set_keyboard_input(["register", "Another Tester", "Abcdefg1!", "3"])
+    home('')
+    output = get_display_output()
+    assert output == ["Please type either: 'Login' or 'Register",
+                      "What would you like to do: ",
+                      "-----------------------------",
+                      "Welcome to the InCollege App!",
+                      "-----------------------------",
+                      "Please enter a unique username: ",
+                      "Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character",
+                      "Please enter a valid password: ",
+                      "Account Created!",
+                      "Entering main page....",
                       '',
                       "--------------------------------------------------------",
                       "InCollege",
