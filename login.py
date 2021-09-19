@@ -76,8 +76,7 @@ def register():
         return
 
     file.write(u + "\n")
-    print(
-        "Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
+    print("Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
     p = input("Please enter a valid password: ")
     res = validatePass(p)
 

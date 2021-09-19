@@ -22,5 +22,7 @@ def home():
         print("Choose a valid option")
         home()
 
+    home()
+
 
 home()
