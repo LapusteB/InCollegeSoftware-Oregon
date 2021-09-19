@@ -49,7 +49,7 @@ def skillsPage():
         mainPage()
     
     
-    pageUnderConstruction()
+    
     
 
 def jobSearchPage():
