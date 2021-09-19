@@ -43,8 +43,9 @@ def skillsPage():
         if(kbInput != "1" and kbInput != "2" 
         and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
             print("Please enter the available options")
-        else: 
+        elif(kbInput != "b"):
             pageUnderConstruction()
+       
     
 
     if(kbInput == "b"):
