@@ -106,7 +106,7 @@ def login(user):
                         x = input("Enter username: ")
                         with open('usernames.txt') as f:
                             if x in f.read():
-                                indexU = linesU.index(u)
+                                indexU = linesU.index(x)
                                 flag = True
                                 break
                             else:
