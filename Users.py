@@ -62,6 +62,8 @@ def register():
     file.close()
     file2.close()
 
+
+
     print("Account Created!")
     print("Entering main page....")
     mainPage()
@@ -73,23 +75,38 @@ def login(user):
     print("--------------------------")
     file = open("usernames.txt", "a")
     file2 = open("passwords.txt", "a")
+    indexU = 0
+    
+
+    filename = "usernames.txt"
+    with open(filename) as file:
+        linesU = file.readlines()
+        linesU = [line.rstrip() for line in linesU]
+
+    filename = "passwords.txt"
+    with open(filename) as file:
+        linesP = file.readlines()
+        linesP = [line.rstrip() for line in linesP]
 
     u = input("Username: ")
     with open('usernames.txt') as f:
         if u in f.read():
+            indexU = linesU.index(u)
             u = True
+          
         else:
             flag = False
-
             while flag == False:
                 with open('usernames.txt') as f:
                     if u in f.read():
+                        indexU = linesU.index(u)
                         break
                     else:
                         print("Error, Username is not recognized")
                         x = input("Enter username: ")
                         with open('usernames.txt') as f:
                             if x in f.read():
+                                indexU = linesU.index(u)
                                 flag = True
                                 break
                             else:
@@ -98,14 +115,13 @@ def login(user):
     file2.close()
 
     p = input("Password: ")
-    pas = validatePass(p)
-    if pas is True:
+    if p == linesP[indexU]:
         mainPage()
     else:
-        while pas is False:
+        while p != linesP[indexU]:
             print("Error, Incorrect password")
             p = input("Enter password: ")
-            if validatePass(p):
+            if p == linesP[indexU]:
                 break
         mainPage()
 
@@ -128,3 +144,5 @@ def username_exists(u):
 
 if __name__ == "__home('')__":
     home('')
+
+home('')
