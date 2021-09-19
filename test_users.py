@@ -104,7 +104,7 @@ def test_username_exists():
 # Tests if username does not exist in username file
 # Not Tester cannot be created in username file for testing purposes
 def test_username_not_exists():
-    assert username_exists("Not Tester")
+    assert username_exists("Not Tester") == False
 
 
 # Tests a correct register of a user
