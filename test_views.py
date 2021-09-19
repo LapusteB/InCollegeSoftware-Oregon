@@ -54,8 +54,7 @@ def test_learnSkills_main():
         "", "--------------------------------------------------------",
         "InCollege","--------------------------------------------------------", "Main page"," Enter page you want to go to: ",
          "   1 to find someone you know, 2 for learn new skills, 3 for search for job\n",
-         "", "--------------------------------------------------------","Page under construction",
-         "", "--------------------------------------------------------","Page under construction" ]
+         "", "--------------------------------------------------------","Page under construction"]
 
 def mock_input(s):
     print_values.append(s)
