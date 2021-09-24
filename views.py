@@ -20,7 +20,7 @@ def mainPage():
             jobSearchPage()
         elif(kbInput == "0"):
             from Users import home
-            home()
+            home('')
         else:
             print("Please enter an available option!!\n")
 

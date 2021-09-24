@@ -14,7 +14,7 @@ class User:
 
 def home(user):
     play_story()
-    print("\nPlease type either: 'Login' or 'Register' or press '1' to see a video of a sucessful student who used InCollege!")
+    print("\nPlease type either: 'Login' or 'Register'. You can also press '0' to find contacts that use InCollege or press '1' to see a video of a sucessful student who used InCollege!")
     a = input("What would you like to do: ")
     if (a == "register" or a == "Register"):
         register()
@@ -22,9 +22,34 @@ def home(user):
         login(user)
     elif(int(a) == 1):
         play_video()
+    elif(int(a) == 0):
+        contacts()
     else:
         print("Choose a valid option")
         home('')
+
+
+def contacts():
+    print("----------------------------")
+    print(" Welcome to Contact Search! ")
+    print("----------------------------")
+
+    file3 = open("accounts.txt", "r")
+
+    firstname = input("Enter the first name of the contact you're looking for: ")
+    lastname = input("Enter the last name of the contact you're looking for: ")
+    name = firstname + " " + lastname
+
+    if (find_contacts(name)):
+        print("They are a part of the InCollege system. Register or login now to join them!" + "\n")
+        home('')
+    else:
+        print("They are not a part of the InCollege system")
+        no_contacts = input("Press '0' to return to login/register page or '1' to search again.")
+        if (int(no_contacts) == 0):
+            home('')
+        elif (int(no_contacts) == 1):
+            contacts()
 
 
 # 'r'- open a file for reading, 'w' - open a file for writing, '+' open a file for reading and writing
@@ -192,6 +217,15 @@ def story_3():
     "website has more than 1 billion active users around the globe, and more than $12 billion in annual revenues.\n" +
     "'Helping a billion people connect is amazing, humbling and by far the thing I am most proud of in my life.'")
     
+
+def find_contacts(n):
+    with open('accounts.txt') as f:
+        if n in f.read():
+            return True
+        return False
+
+
+
 
 
 if __name__ == "__home('')__":
