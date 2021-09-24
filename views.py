@@ -74,9 +74,11 @@ def peopleSearchPage():
     from Users import find_contacts
 
     if (find_contacts(name)):
+        print("")
         print("They are a part of the InCollege system." + "\n")
         mainPage()
     else:
+        print("")
         print("They are not a part of the InCollege system" + "\n")
         mainPage()
     a = input("Press '0' to return.")

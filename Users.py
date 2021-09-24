@@ -41,9 +41,11 @@ def contacts():
     name = firstname + " " + lastname
 
     if (find_contacts(name)):
+        print("")
         print("They are a part of the InCollege system. Register or login now to join them!" + "\n")
         home('')
     else:
+        print("")
         print("They are not a part of the InCollege system")
         no_contacts = input("Press '0' to return to login/register page or '1' to search again.")
         if (int(no_contacts) == 0):
