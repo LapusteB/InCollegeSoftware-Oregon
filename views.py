@@ -11,7 +11,7 @@ def mainPage():
         print("--------------------------------------------------------")
         print("Main page")
         print(" Enter page you want to go to: ")
-        kbInput = input("   1 to find someone you know, 2 for learn new skills, 3 for search for job, '0' to return to login\n")
+        kbInput = input("   '1' to find someone you know, '2' for learn new skills, '3' for search for job, '4' to post a new job, '0' to return to login\n")
         if(kbInput == "1"):
             peopleSearchPage()
         elif(kbInput == "2"):
@@ -21,12 +21,37 @@ def mainPage():
         elif(kbInput == "0"):
             from Users import home
             home('')
+        elif(kbInput == 4):
+            postNewJob()
         else:
             print("Please enter an available option!!\n")
 
 
+def postNewJob():
+    print("-----------------------------------")
+    print(" Welcome to the Job Creation Page! ")
+    print("-----------------------------------")
+
+
 def peopleSearchPage():
-    print("Page under construction.")
+    print("----------------------------")
+    print(" Welcome to Contact Search! ")
+    print("----------------------------")
+
+    file3 = open("accounts.txt", "r")
+
+    firstname = input("Enter the first name of the contact you're looking for: ")
+    lastname = input("Enter the last name of the contact you're looking for: ")
+    name = firstname + " " + lastname
+    
+    from Users import find_contacts
+
+    if (find_contacts(name)):
+        print("They are a part of the InCollege system." + "\n")
+        mainPage()
+    else:
+        print("They are not a part of the InCollege system" + "\n")
+        mainPage()
     a = input("Press '0' to return.")
     if int(a) == 0:
         mainPage()
