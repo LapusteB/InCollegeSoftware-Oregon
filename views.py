@@ -18,22 +18,49 @@ def mainPage():
             skillsPage()
         elif(kbInput == "3"):
             jobSearchPage()
+        elif(kbInput == "4"):
+            postNewJob()
         elif(kbInput == "0"):
             from Users import home
             home('')
-        elif(kbInput == 4):
-            postNewJob()
         else:
             print("Please enter an available option!!\n")
 
 
 def postNewJob():
+    select = "x"
     print("-----------------------------------")
     print(" Welcome to the Job Creation Page! ")
     print("-----------------------------------")
+    while(select != 'y' and select != 'Y' and select != 'n' and select != "N"):
+        select = input("Would you like to create a job? ('y' or 'n'): ")
+        if (select == 'y' or select =='Y'):
+            createNewJob()
+        elif (select == 'n' or select == 'N'):
+            mainPage()
+        else:
+            print("Invalid input please try again.")
+
+
+def createNewJob():
+    print("")
+    title = input("Enter the title for your job: ")
+    description = input("Enter the description for your job: ")
+    employer = input("Enter the employer for your job: ")
+    location = input("Enter the location for your job: ")
+    salary = input("Enter the salary for your job: ")
+
+    saveJob(title, description, employer, location, salary)
+
+
+def saveJob(t, d, e, l, s):
+    file4 = open("jobs.txt", "a")
+    file4.write(t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\n")
+    file4.close()
 
 
 def peopleSearchPage():
+    a = -1
     print("----------------------------")
     print(" Welcome to Contact Search! ")
     print("----------------------------")
@@ -55,6 +82,9 @@ def peopleSearchPage():
     a = input("Press '0' to return.")
     if int(a) == 0:
         mainPage()
+
+    file3.close()
+
 
 def skillsPage():
     kbInput = "6"
