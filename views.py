@@ -26,7 +26,10 @@ def mainPage():
 
 
 def peopleSearchPage():
-    pageUnderConstruction()
+    print("Page under construction.")
+    a = input("Press '0' to return.")
+    if int(a) == 0:
+        mainPage()
 
 def skillsPage():
     kbInput = "6"
@@ -47,8 +50,10 @@ def skillsPage():
         and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
             print("Please enter the available options")
         elif(kbInput != "b"):
-            pageUnderConstruction()
-       
+            print("Page under construction.")
+            a = input("Press '0' to return")
+            if int(a) == 0:
+                mainPage()       
     
 
     if(kbInput == "b"):
@@ -59,7 +64,10 @@ def skillsPage():
     
 
 def jobSearchPage():
-    pageUnderConstruction()
+    print("Page under construction.")
+    a = input("Press '0' to return.")
+    if int(a) == 0:
+        mainPage()
 
 def pageUnderConstruction():
     print("")

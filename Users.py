@@ -40,9 +40,13 @@ def register():
         home('')
 
     # Checks if there is a duplicate username
+    print("(Press '0' to return)")
     u = input("Please enter a unique username: ")
     if username_exists(u):
         print("Error, Username already created! Returning home")
+        home('')
+
+    if u == "0":
         home('')
 
     file.write(u + "\n")
@@ -97,12 +101,14 @@ def login(user):
         linesP = file.readlines()
         linesP = [line.rstrip() for line in linesP]
 
-    u = input("Username: ")
+        print("(Press '0' to return)")
+    u = input("Username:")
     with open('usernames.txt') as f:
         if u in f.read():
             indexU = linesU.index(u)
             u = True
-          
+        elif u == "0":
+            home('')
         else:
             flag = False
             while flag == False:
