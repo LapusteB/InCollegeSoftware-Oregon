@@ -35,11 +35,22 @@ def postNewJob():
     while(select != 'y' and select != 'Y' and select != 'n' and select != "N"):
         select = input("Would you like to create a job? ('y' or 'n'): ")
         if (select == 'y' or select =='Y'):
+            if (has_max_jobs()):
+                mainPage()
             createNewJob()
         elif (select == 'n' or select == 'N'):
             mainPage()
         else:
             print("Invalid input please try again.")
+
+
+def has_max_jobs():
+    count = 0
+    for line in open("jobs.txt", "r"): count += 1
+    if count == 5 or count > 5:
+        print("All permitted jobs have been posted, please come back later." + "\n")
+        return True
+    return False
 
 
 def createNewJob():
