@@ -133,6 +133,7 @@ def login(user):
     with open('usernames.txt') as f:
         if u in f.read():
             indexU = linesU.index(u)
+            User.username = u
             u = True
         elif u == "0":
             home('')
