@@ -1,7 +1,9 @@
 from validatePass import validatePass
-from Users import play_story, play_video, register, username_exists
+from Users import find_contacts, home, play_story, play_video, register, username_exists
 import builtins
 import random
+from unittest import mock
+import sys
 
 input_values = []
 print_values = []
@@ -30,6 +32,12 @@ def test_story():
     play_story()
     output = get_display_output()
     assert output == ["John L. Miller, 25 years at Microsoft, Amazon, Google, etc. C++, C, Java, Basic, etc. PhD.\n'I loved computers. I taught myself to program in high school,\nand thought I was pretty good at it (Apple Basic and 6502 assembler)\nby the time I graduated. I got a job typesetting at a newspaper,\nand enrolled in university part time, taking programming classes.'\n"]
+
+
+def test_contacts():
+    contacts_found = find_contacts("Example Username")
+    assert contacts_found == True
+
 
 def mock_input(s):
     print_values.append(s)
