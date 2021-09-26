@@ -102,11 +102,11 @@ def register():
     file2.close()
     file3.close()
    
-
+    nameofuser = Fname + " " + Lname
     print("\nHello, " + Fname)
     print("Account Created!")
     print("Entering main page....")
-    mainPage()
+    mainPage(nameofuser)
 
 
 def login(user):
