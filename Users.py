@@ -20,9 +20,9 @@ def home(user):
         register()
     elif (a == "Login" or a == "login"):
         login(user)
-    elif(int(a) == 1):
+    elif(a == "1"):
         play_video()
-    elif(int(a) == 0):
+    elif(a == "0"):
         contacts()
     else:
         print("Choose a valid option")
