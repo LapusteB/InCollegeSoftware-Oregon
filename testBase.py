@@ -1,6 +1,8 @@
 import builtins
 from validatePass import validatePass
 
+
+
 def has_max_users():
     count = 0
     for line in open("usernames.txt", "r"): count += 1
