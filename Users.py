@@ -24,7 +24,7 @@ def home(user):
         b = input("Press '0' to find contacts that use InCollege or press '1' to see a video of a sucessful student who used InCollege! ")
         if (b == "1"):
             play_video()
-        elif(a == "0"):
+        elif(b == "0"):
             contacts()
         else:
             print("Choose a valid option ")
