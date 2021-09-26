@@ -1,5 +1,5 @@
 from validatePass import validatePass
-from Users import find_contacts, home, play_story, play_video, register, username_exists
+from login import find_contacts, play_story, play_video, register, username_exists
 import builtins
 import random
 from unittest import mock
