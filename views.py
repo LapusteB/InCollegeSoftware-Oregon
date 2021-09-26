@@ -1,6 +1,11 @@
 #call after successfully login:
 
-def mainPage():
+from os import name
+
+
+def mainPage(nameofuser):
+    global name
+    name = nameofuser
 
     kbInput = "-1"
 
@@ -61,12 +66,15 @@ def createNewJob():
     location = input("Enter the location for your job: ")
     salary = input("Enter the salary for your job: ")
 
-    saveJob(title, description, employer, location, salary)
+    saveJob(name, title, description, employer, location, salary)
+
+    print("\nyour job has been saved")
+    mainPage(name)
 
 
-def saveJob(t, d, e, l, s):
+def saveJob(n, t, d, e, l, s):
     file4 = open("jobs.txt", "a")
-    file4.write(t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\n")
+    file4.write(n + "\t" + t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\n")
     file4.close()
 
 
@@ -81,6 +89,8 @@ def peopleSearchPage():
     firstname = input("Enter the first name of the contact you're looking for: ")
     lastname = input("Enter the last name of the contact you're looking for: ")
     name = firstname + " " + lastname
+    
+    from Users import find_contacts
 
     if (find_contacts(name)):
         print("")
@@ -140,8 +150,4 @@ def pageUnderConstruction():
     print("--------------------------------------------------------")
     print("Page under construction")
 
-def find_contacts(n):
-    with open('accounts.txt') as f:
-        if n in f.read():
-            return True
-        return False
+

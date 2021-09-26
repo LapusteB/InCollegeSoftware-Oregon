@@ -11,8 +11,8 @@ class User:
         self.password = password
         self.loggedIn = True
 
-
 def home(user):
+    a = ""
     play_story()
     print("\nPlease type either: 'Login' or 'Register'. You can also press '0' to find contacts that use InCollege or press '1' to see a video of a sucessful student who used InCollege!")
     a = input("What would you like to do: ")
@@ -115,6 +115,7 @@ def login(user):
     print("--------------------------")
     file = open("usernames.txt", "a")
     file2 = open("passwords.txt", "a")
+    file3 = open("accounts.txt", "a")
     indexU = 0
     
 
@@ -133,7 +134,6 @@ def login(user):
     with open('usernames.txt') as f:
         if u in f.read():
             indexU = linesU.index(u)
-            User.username = u
             u = True
         elif u == "0":
             home('')
@@ -154,24 +154,32 @@ def login(user):
                                 break
                             else:
                                 flag = False
+    with open('accounts.txt') as file:
+        linesN = file.readlines()
+    name = linesN[indexU]
     file.close()
     file2.close()
+    file3.close()
+
+    global login_name
+    login_name = name.strip()
 
     p = input("Password: ")
     flag = validatePass(p)
 
 
     if p == linesP[indexU]:
-        mainPage()
+        mainPage(login_name)
     else:
         while p != linesP[indexU]:
             print("Error, Incorrect password")
             p = input("Enter password: ")
             if p == linesP[indexU]:
                 break
-        mainPage()
+        mainPage(login_name)
 
 #def Get_or_find account():
+
 
 def has_max_users():
     count = 0
