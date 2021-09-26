@@ -16,15 +16,13 @@ def mainPage(nameofuser):
         print("--------------------------------------------------------")
         print("Main page")
         print(" Enter page you want to go to: ")
-        kbInput = input("   '1' to find someone you know, '2' for learn new skills, '3' for search for job, '4' to post a new job, '0' to return to login\n")
+        kbInput = input("   '1' to find someone you know, '2' for learn new skills, '3' for job search/ internship, '0' to return to login\n")
         if(kbInput == "1"):
             peopleSearchPage()
         elif(kbInput == "2"):
             skillsPage()
         elif(kbInput == "3"):
             jobSearchPage()
-        elif(kbInput == "4"):
-            postNewJob()
         elif(kbInput == "0"):
             from Users import home
             home('')
@@ -129,21 +127,26 @@ def skillsPage():
             print("Page under construction.")
             a = input("Press '0' to return")
             if int(a) == 0:
-                mainPage()       
+                mainPage(name)
     
 
     if(kbInput == "b"):
-        mainPage()
+        mainPage(name)
     
     
     
     
 
 def jobSearchPage():
-    print("Page under construction.")
-    a = input("Press '0' to return.")
-    if int(a) == 0:
-        mainPage()
+    print("\n")
+    print("Job Search")
+    print("------------")
+    a = input("Press '0' to return or 1 to post a new job.")
+
+    if a == "0":
+        mainPage(name)
+    elif(a == "1"):
+        postNewJob()
 
 def pageUnderConstruction():
     print("")
