@@ -81,8 +81,6 @@ def peopleSearchPage():
     firstname = input("Enter the first name of the contact you're looking for: ")
     lastname = input("Enter the last name of the contact you're looking for: ")
     name = firstname + " " + lastname
-    
-    from Users import find_contacts
 
     if (find_contacts(name)):
         print("")
@@ -142,4 +140,8 @@ def pageUnderConstruction():
     print("--------------------------------------------------------")
     print("Page under construction")
 
-
+def find_contacts(n):
+    with open('accounts.txt') as f:
+        if n in f.read():
+            return True
+        return False
