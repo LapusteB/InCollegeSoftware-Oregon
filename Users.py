@@ -14,18 +14,23 @@ class User:
 def home(user):
     a = ""
     play_story()
-    print("\nPlease type either: 'Login' or 'Register'. You can also press '0' to find contacts that use InCollege or press '1' to see a video of a sucessful student who used InCollege!")
+    print("\nPlease type either: 'Login' or 'Register'. You can also press 0 for more options.")
     a = input("What would you like to do: ")
     if (a == "register" or a == "Register"):
         register()
     elif (a == "Login" or a == "login"):
         login(user)
-    elif(a == "1"):
-        play_video()
     elif(a == "0"):
-        contacts()
+        b = input("Press '0' to find contacts that use InCollege or press '1' to see a video of a sucessful student who used InCollege! ")
+        if (b == "1"):
+            play_video()
+        elif(a == "0"):
+            contacts()
+        else:
+            print("Choose a valid option ")
+            home('')
     else:
-        print("Choose a valid option")
+        print("Choose a valid option ")
         home('')
 
 
