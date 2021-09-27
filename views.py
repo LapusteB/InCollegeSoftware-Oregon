@@ -1,4 +1,4 @@
-#call after successfully login:
+# call after successfully login:
 
 from os import name
 
@@ -9,23 +9,23 @@ def mainPage(nameofuser):
 
     kbInput = "-1"
 
-    while(kbInput != "1" and kbInput != "2" and kbInput != "3"):
+    while (kbInput != "1" and kbInput != "2" and kbInput != "3"):
         print("")
         print("--------------------------------------------------------")
         print("InCollege")
         print("--------------------------------------------------------")
         print("Main page")
         print(" Enter page you want to go to: ")
-        kbInput = input("   '1' to find someone you know, '2' for learn new skills, '3' for job search/ internship, '0' to return to login\n")
-        if(kbInput == "1"):
+        kbInput = input(
+            "   '1' to find someone you know, '2' for learn new skills, '3' for job search/ internship, '0' to return to login\n")
+        if (kbInput == "1"):
             peopleSearchPage()
-        elif(kbInput == "2"):
+        elif (kbInput == "2"):
             skillsPage()
-        elif(kbInput == "3"):
+        elif (kbInput == "3"):
             jobSearchPage()
-        elif(kbInput == "0"):
-            from Users import home
-            home('')
+        elif (kbInput == "0"):
+            return
         else:
             print("Please enter an available option!!\n")
 
@@ -35,9 +35,9 @@ def postNewJob():
     print("-----------------------------------")
     print(" Welcome to the Job Creation Page! ")
     print("-----------------------------------")
-    while(select != 'y' and select != 'Y' and select != 'n' and select != "N"):
+    while (select != 'y' and select != 'Y' and select != 'n' and select != "N"):
         select = input("Would you like to create a job? ('y' or 'n'): ")
-        if (select == 'y' or select =='Y'):
+        if (select == 'y' or select == 'Y'):
             if (has_max_jobs()):
                 mainPage()
             createNewJob()
@@ -87,8 +87,8 @@ def peopleSearchPage():
     firstname = input("Enter the first name of the contact you're looking for: ")
     lastname = input("Enter the last name of the contact you're looking for: ")
     name = firstname + " " + lastname
-    
-    from Users import find_contacts
+
+    from login import find_contacts
 
     if (find_contacts(name)):
         print("")
@@ -108,8 +108,8 @@ def peopleSearchPage():
 def skillsPage():
     kbInput = "6"
 
-    while(kbInput != "1" and kbInput != "2" 
-        and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
+    while (kbInput != "1" and kbInput != "2"
+           and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
         print("--------------------------------------------------------")
         print("Available skills to learn:")
         print("Enter the Coressponding Number with a skill to learn it today:")
@@ -120,37 +120,36 @@ def skillsPage():
         print(" 5. Microsoft Excel basics")
         kbInput = input(" Or enter b for return to mainPage\n")
 
-        if(kbInput != "1" and kbInput != "2" 
-        and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
+        if (kbInput != "1" and kbInput != "2"
+                and kbInput != "3" and kbInput != "4" and kbInput != "5" and kbInput != "b"):
             print("Please enter the available options")
-        elif(kbInput != "b"):
+        elif (kbInput != "b"):
             print("Page under construction.")
             a = input("Press '0' to return")
             if int(a) == 0:
                 mainPage(name)
-    
 
-    if(kbInput == "b"):
+    if (kbInput == "b"):
         mainPage(name)
-    
-    
-    
-    
+
 
 def jobSearchPage():
     print("\n")
     print("Job Search")
     print("------------")
-    a = input("Press '0' to return or 1 to post a new job.")
+    a = "x"
 
-    if a == "0":
-        mainPage(name)
-    elif(a == "1"):
-        postNewJob()
+    while (a != "0" and a != "1"):
+        a = input("Press '0' to return or 1 to post a new job.")
+        if a == "0":
+            mainPage(name)
+        elif (a == "1"):
+            postNewJob()
+        else:
+            print("Please enter an available option!!\n")
+
 
 def pageUnderConstruction():
     print("")
     print("--------------------------------------------------------")
     print("Page under construction")
-
-
