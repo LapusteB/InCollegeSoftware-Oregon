@@ -9,7 +9,7 @@ def mainPage(nameofuser):
 
     kbInput = "-1"
 
-    while(kbInput != "1" and kbInput != "2" and kbInput != "3" and kbInput != "4"):
+    while(kbInput != "1" and kbInput != "2" and kbInput != "3"):
         print("")
         print("--------------------------------------------------------")
         print("InCollege")

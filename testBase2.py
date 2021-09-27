@@ -1,5 +1,46 @@
 from os import name
 
+def jobSearchPage():
+    print("\n")
+    print("Job Search")
+    print("------------")
+    a = input("Press '0' to return or 1 to post a new job.")
+
+    if a == "0":
+        print("mainPage")
+        #mainPage(name)
+    elif(a == "1"):
+        postNewJob()
+
+def mainPage2(nameofuser):
+    global name
+    name = nameofuser
+
+    kbInput = "-1"
+
+    while(kbInput != "1" and kbInput != "2" and kbInput != "3"):
+        print("")
+        print("--------------------------------------------------------")
+        print("InCollege")
+        print("--------------------------------------------------------")
+        print("Main page")
+        print(" Enter page you want to go to: ")
+        kbInput = input("   '1' to find someone you know, '2' for learn new skills, '3' for job search/ internship, '0' to return to login\n")
+        if(kbInput == "1"):
+            #peopleSearchPage()
+            print("")
+        elif(kbInput == "2"):
+            #skillsPage()
+            print("")
+        elif(kbInput == "3"):
+            jobSearchPage()
+            print("")
+        elif(kbInput == "0"):
+            from Users import home
+            home('')
+        else:
+            print("Please enter an available option!!\n")
+
 
 def mainPage(nameofuser):
     global name
@@ -22,8 +63,8 @@ def mainPage(nameofuser):
             print("")
             #skillsPage()
         elif(kbInput == "3"):
-            print("")
-            #jobSearchPage()
+            #print("")
+            jobSearchPage()
         elif(kbInput == "4"):
             postNewJob()
         elif(kbInput == "0"):

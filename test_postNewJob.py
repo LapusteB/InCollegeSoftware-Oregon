@@ -11,12 +11,12 @@ print_values = []
 def test_post_job():
     print("")
     mock_input_output_start()
-    set_input(["4","y","a","a","a","a","a",
-                "4","y","a","a","a","a","a"])
+    set_input(["3","1","y","a","a","a","a","a",
+                "3","1","y","a","a","a","a","a"])
     
 
-    testBase2.mainPage("van le")
-    testBase2.mainPage("kieu le")
+    testBase2.mainPage2("van le")
+    testBase2.mainPage2("kieu le")
     file = open("jobs.txt","r")
     contents = file.readlines()
     file.close()
