@@ -1,30 +1,41 @@
 # call after successfully login:
 
 from os import name
+import usefulLinks
 
 
 def mainPage(nameofuser):
     global name
     name = nameofuser
 
-    kbInput = "-1"
+    kbInput = '-1'
 
-    while (kbInput != "1" and kbInput != "2" and kbInput != "3"):
+    while (kbInput != '0'):
         print("")
-        print("--------------------------------------------------------")
-        print("InCollege")
-        print("--------------------------------------------------------")
+        print("*************")
+        print("* InCollege *")
+        print("*************")
+        print("")
         print("Main page")
-        print(" Enter page you want to go to: ")
-        kbInput = input(
-            "   '1' to find someone you know, '2' for learn new skills, '3' for job search/ internship, '0' to return to login\n")
-        if (kbInput == "1"):
+        print("------------------------------------")
+        print("| '1' to find someone you know      |")
+        print("| '2' for learn new skill           |")
+        print("| '3' for job search/ internship    |")
+        print("| '4' for useful links              |")
+        print("| '0' to return to login            |")
+        print("-------------------------------------")
+        print("")
+        kbInput = input("Enter page you want to go to: ")
+
+        if (kbInput == '1'):
             peopleSearchPage()
-        elif (kbInput == "2"):
+        elif (kbInput == '2'):
             skillsPage()
-        elif (kbInput == "3"):
+        elif (kbInput == '3'):
             jobSearchPage()
-        elif (kbInput == "0"):
+        elif (kbInput == '4'):
+            usefulLinks.menu()
+        elif (kbInput == '0'):
             return
         else:
             print("Please enter an available option!!\n")
