@@ -4,6 +4,7 @@ import usefulLinks
 from views import mainPage
 from validatePass import validatePass
 import login
+import importantLinks
 
 
 class User:
@@ -51,6 +52,8 @@ def home(user):
                     login.play_video()
                 elif (b == "3"):
                     usefulLinks.menu()
+                elif(b == "4"):
+                    importantLinks.Menu()
                 else:
                     print("Choose a valid option ")
 
