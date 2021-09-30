@@ -8,7 +8,7 @@ def Menu():
 
     selection = ''
     while (selection != '0'):
-        print("-----------------------------------------")
+        print("-------------------------------------------")
         print("| Press '1' for the Copyright Notice.     |")
         print("| Press '2' for About.                    |")
         print("| Press '3' for Accessibility.            |")
@@ -20,7 +20,7 @@ def Menu():
         print("| Press '9' for the Guest Controls.       |")
         print("| Press '10' for Languages.               |")
         print("| Press '0' to return to previous menu.   |")
-        print("-----------------------------------------")
+        print("-------------------------------------------")
         selection = input("Enter the page you want to go to: ")
 
         if (selection == '0'):
