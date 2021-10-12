@@ -1,25 +1,58 @@
 class Friend:
-    def __init__(self, username, friend_lastname):
+    def __init__(self, username, friend_username):
         self.username = username
-        self.friend_lastname = friend_lastname
+        self.friend_username = friend_username
+    
+    def __eq__(self, other):
+        return self.username == other.username and self.friend_username == other.friend_username
 
 def friendMenu(username):
-    global friends, requested_friendList, user
+    global requested_friendList, user
     requested_friendList = []
+    
     user = username
-    addFriends(username)
+    requestFile = open("friend_requested.txt", "r")
+    for line in requestFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            temp = Friend(u, fu)
+            requested_friendList.append(temp)            
+    requestFile.close()
+
     show_network(username)
-    disconnect_network(username)
+    cmd = ""
+    while(cmd != "0"):
+                
+        print("")
+        print("------------------------------------------")
+        print("| '1' to show your network               |")
+        print("| '2' to search people and send reuqest  |")
+        print("| '3' to disconnect network              |")
+        print("| '0' to return to main page             |")
+        print("------------------------------------------")
+        cmd = input("What would you like to do: ")
 
-    fn = open('friend_requested.txt', 'r+')
-    fn.truncate(0)
+        if (cmd == '1'):
+            show_network(username)
+        elif (cmd == '2'):
+            addFriends(username)
+        elif (cmd == '3'):
+            disconnect_network(username)
+        elif (cmd == '0'):
+            return
+        else:
+            print("Invalid input, please try again")
+            print("")
+      
+        fn = open('friend_requested.txt', 'r+')
+        fn.truncate(0)
 
-    for rel in requested_friendList:
-        requestFileWrite = open("friend_requested.txt", 'a')
-        
-        requestFileWrite.write(rel.username + '\t' +
-                                rel.friend_lastname + '\n')
-        requestFileWrite.close()
+        for rel in requested_friendList:
+            requestFileWrite = open("friend_requested.txt", 'a')
+            
+            requestFileWrite.write(rel.username + '\t' +
+                                    rel.friend_username + '\n')
+            requestFileWrite.close()
 
 def friendList(username):
     open("friendList.txt","r")
@@ -61,7 +94,7 @@ def addFriends(username):
             if(has_user_last(input_last)):
                 request = input("User with that last name exists. Would you like to send friend request?(y/n) ")                    
                 if(request == 'y'):
-                    temp = Friend(username, input_last)
+                    temp = Friend(username, last_username)
                     requested_friendList.append(temp)
                     print("Friend request has been sent")
                     keep = input("Would you like to continue search?(y/n) ")
@@ -120,12 +153,13 @@ def addFriends(username):
             keep = input("Would you like to continue search?(y/n) ")
 
 def has_user_last(input_last):
-    
+    global last_username
     for line in open("profile.txt", "r"):
         if line != '\n':
             u, t, m, n, a = line.split('\t')
             first, last= u.split(' ')
             if(last == input_last):
+                last_username = u
                 return True
     return False
 
@@ -150,26 +184,35 @@ def has_user_maj(input_uni):
     return False
 
 def show_network(username):
+    count_pending = 0
     print("Your pending friend requests:\n")
     requestFile = open("friend_requested.txt", "r")
     for line in requestFile:
         if line != '\n':
             u, fu = line.split('\t')
             if (u == username):
+                count_pending += 1
                 print("Waiting friend reuqest response from: " + fu)
     requestFile.close()  
 
+    if(count_pending == 0):
+        print("No pending friend requests")
+
+    count_friend = 0
     print("Your friends:\n")
     friendFile = open("friendList.txt", "r")
     for line in friendFile:
         if line != '\n':
             u, fu = line.split('\t')
             if (u == username or fu == username):
+                count_friend += 1
                 if(u == username):
                     print("Friend username: " + fu)
                 else:
                     print("Friend username: " + u)
     friendFile.close()    
+    if(count_friend == 0):
+        print("No friend to show")
 
 def disconnect_network(username):
     print("Your friends:\n")
@@ -215,3 +258,26 @@ def has_delete_user(delete):
                 return True             
     friendFile.close() 
     return False  
+
+def has_pending_requests(username):
+    
+    requestFile = open("friend_requested.txt", "r")
+    for line in requestFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            if(fu == username):
+                print("You have pending friend requests from " + u)
+                decision = input("Would you like to accept or reject the request? ")
+                if(decision == "accept" or decision == "Accept"):
+                    friendFileWrite = open("friendList.txt", 'a')
+            
+                    friendFileWrite.write(u + '\t' +
+                                    username + '\n')
+                    friendFileWrite.close()
+                    del line
+                    print("Friend request has been successfully accepted")
+                elif(decision == "reject" or decision == "Reject"):
+                    del line
+                    print("Friend request has been successfully rejected")
+        
+    requestFile.close()
