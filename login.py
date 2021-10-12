@@ -154,7 +154,7 @@ def contacts():
 def has_max_users():
     count = 0
     for line in open("usernames.txt", "r"): count += 1
-    if count == 5 or count > 5:
+    if count == 10 or count > 10:
         print("All permitted accounts have been created, please come backlater")
         return True
     return False

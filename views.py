@@ -4,6 +4,7 @@
 from os import name
 import usefulLinks
 import profile
+import friend
 
 
 def mainPage(nameofuser):
@@ -25,6 +26,7 @@ def mainPage(nameofuser):
         print("| '3' for job search/ internship    |")
         print("| '4' for useful links              |")
         print("| '5' to go to your profile         |")
+        print("| '6' to show your network          |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
         print("")
@@ -40,6 +42,8 @@ def mainPage(nameofuser):
             usefulLinks.menu()
         elif (kbInput == '5'):
             profile.profileMenu(name)
+        elif (kbInput == '6'):
+            friend.friendMenu(name)
         elif (kbInput == '0'):
             return
         else:
