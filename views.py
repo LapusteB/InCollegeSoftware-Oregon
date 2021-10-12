@@ -1,7 +1,9 @@
+
 # call after successfully login:
 
 from os import name
 import usefulLinks
+import profile
 
 
 def mainPage(nameofuser):
@@ -22,6 +24,7 @@ def mainPage(nameofuser):
         print("| '2' for learn new skill           |")
         print("| '3' for job search/ internship    |")
         print("| '4' for useful links              |")
+        print("| '5' to go to your profile         |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
         print("")
@@ -35,6 +38,8 @@ def mainPage(nameofuser):
             jobSearchPage()
         elif (kbInput == '4'):
             usefulLinks.menu()
+        elif (kbInput == '5'):
+            profile.profileMenu(name)
         elif (kbInput == '0'):
             return
         else:
