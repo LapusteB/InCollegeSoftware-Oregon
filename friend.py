@@ -4,13 +4,12 @@ class Friend:
         self.friend_lastname = friend_lastname
 
 def friendMenu(username):
-    global requested_friendList
+    global friends, requested_friendList, user
     requested_friendList = []
-    
-
-
+    user = username
     addFriends(username)
     show_network(username)
+    disconnect_network(username)
 
     fn = open('friend_requested.txt', 'r+')
     fn.truncate(0)
@@ -171,3 +170,48 @@ def show_network(username):
                 else:
                     print("Friend username: " + u)
     friendFile.close()    
+
+def disconnect_network(username):
+    print("Your friends:\n")
+    friendFile = open("friendList.txt", "r")
+    for line in friendFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            if (u == username or fu == username):
+                if(u == username):
+                    print("Friend username: " + fu)
+                else:
+                    print("Friend username: " + u)
+    friendFile.close() 
+
+    delete = input("Which user would you like to be disconnected? ")
+    if(has_delete_user(delete) == False):
+        print("The user is not friend with you")
+        return
+
+    friendFile = open("friendList.txt", "r")
+    for line in friendFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            if (u == username and fu == delete):
+                del line
+                print(fu + " has been disconnected from your friend list ")
+                break
+            elif(u == delete and fu == username):
+                del line
+                print(u + " has been disconnected from your friend list ")
+                break
+            
+    friendFile.close() 
+
+def has_delete_user(delete):
+    friendFile = open("friendList.txt", "r")
+    for line in friendFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            if (u == user and  fu == delete):
+                return True
+            elif(u == delete and fu == user):
+                return True             
+    friendFile.close() 
+    return False  
