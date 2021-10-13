@@ -12,7 +12,7 @@ def mainPage(nameofuser):
     name = nameofuser
 
     friend.has_pending_requests(nameofuser)
-
+    
     kbInput = '-1'
 
     while (kbInput != '0'):

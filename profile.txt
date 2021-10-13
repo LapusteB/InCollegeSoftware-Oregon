@@ -1,2 +1,2 @@
-Student Learner	w	W 	W 	w
-Student2 Learner2	q	Q 		
+Student Learner	t	M 	U 	a
+Student2 Learner2	T	M 	U 	A

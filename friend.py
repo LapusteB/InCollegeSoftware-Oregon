@@ -4,7 +4,7 @@ class Friend:
         self.friend_username = friend_username
     
     def __eq__(self, other):
-        return self.username == other.username and self.friend_username == other.friend_username
+        return self.friend_username == other.friend_username
 
 def friendMenu(username):
     global requested_friendList, user
@@ -51,7 +51,7 @@ def friendMenu(username):
             requestFileWrite = open("friend_requested.txt", 'a')
             
             requestFileWrite.write(rel.username + '\t' +
-                                    rel.friend_username + '\n')
+                                    rel.friend_username )
             requestFileWrite.close()
 
 def friendList(username):
@@ -157,8 +157,9 @@ def has_user_last(input_last):
     for line in open("profile.txt", "r"):
         if line != '\n':
             u, t, m, n, a = line.split('\t')
+            
             first, last= u.split(' ')
-            if(last == input_last):
+            if(last == input_last and u != user):
                 last_username = u
                 return True
     return False
@@ -168,17 +169,19 @@ def has_user_uni(input_uni):
     for line in open("profile.txt", "r"):
         if line != '\n':
             u, t, m, n, a = line.split('\t')
-            if( n == input_uni):
+            
+            if(n == input_uni+' ' and u != user):
                 uni_username = u
                 return True
     return False
 
-def has_user_maj(input_uni):
+def has_user_maj(input_maj):
     global maj_username
     for line in open("profile.txt", "r"):
         if line != '\n':
             u, t, m, n, a = line.split('\t')
-            if( n == input_uni):
+            
+            if(m == input_maj + ' ' and u != user):
                 maj_username = u
                 return True
     return False
@@ -220,6 +223,7 @@ def disconnect_network(username):
     for line in friendFile:
         if line != '\n':
             u, fu = line.split('\t')
+            
             if (u == username or fu == username):
                 if(u == username):
                     print("Friend username: " + fu)
@@ -227,25 +231,31 @@ def disconnect_network(username):
                     print("Friend username: " + u)
     friendFile.close() 
 
+    aFile = open("friendList.txt", "r")
+    lines = aFile.readlines()
+    aFile.close()
+
     delete = input("Which user would you like to be disconnected? ")
     if(has_delete_user(delete) == False):
         print("The user is not friend with you")
         return
 
-    friendFile = open("friendList.txt", "r")
-    for line in friendFile:
+    wFile = open("friendList.txt", "w")
+    for line in lines:
         if line != '\n':
             u, fu = line.split('\t')
             if (u == username and fu == delete):
-                del line
+                
                 print(fu + " has been disconnected from your friend list ")
                 break
             elif(u == delete and fu == username):
-                del line
+                
                 print(u + " has been disconnected from your friend list ")
                 break
-            
-    friendFile.close() 
+            else:
+                wFile.write(line)
+    wFile.close() 
+    
 
 def has_delete_user(delete):
     friendFile = open("friendList.txt", "r")
@@ -261,10 +271,15 @@ def has_delete_user(delete):
 
 def has_pending_requests(username):
     
-    requestFile = open("friend_requested.txt", "r")
-    for line in requestFile:
+    aFile = open("friend_requested.txt", "r")
+    lines = aFile.readlines()
+    aFile.close()
+
+    wFile = open("friend_requested.txt", "w")    
+    for line in lines:
         if line != '\n':
             u, fu = line.split('\t')
+            
             if(fu == username):
                 print("You have pending friend requests from " + u)
                 decision = input("Would you like to accept or reject the request? ")
@@ -272,12 +287,13 @@ def has_pending_requests(username):
                     friendFileWrite = open("friendList.txt", 'a')
             
                     friendFileWrite.write(u + '\t' +
-                                    username + '\n')
+                                    username)
                     friendFileWrite.close()
-                    del line
+                    
                     print("Friend request has been successfully accepted")
                 elif(decision == "reject" or decision == "Reject"):
-                    del line
+                    
                     print("Friend request has been successfully rejected")
-        
-    requestFile.close()
+            else:
+                wFile.write(line)
+    wFile.close()
