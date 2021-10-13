@@ -51,7 +51,7 @@ def friendMenu(username):
             requestFileWrite = open("friend_requested.txt", 'a')
             
             requestFileWrite.write(rel.username + '\t' +
-                                    rel.friend_username + '\n' )
+                                    rel.friend_username + '\n')
             requestFileWrite.close()
 
 def friendList(username):
@@ -280,7 +280,7 @@ def has_pending_requests(username):
         if line != '\n':
             u, fu = line.split('\t')
             
-            if(fu == username):
+            if(fu == username + '\n'):
                 print("You have pending friend requests from " + u)
                 decision = input("Would you like to accept or reject the request? ")
                 if(decision == "accept" or decision == "Accept"):
