@@ -51,7 +51,7 @@ def friendMenu(username):
             requestFileWrite = open("friend_requested.txt", 'a')
             
             requestFileWrite.write(rel.username + '\t' +
-                                    rel.friend_username )
+                                    rel.friend_username + '\n' )
             requestFileWrite.close()
 
 def friendList(username):
