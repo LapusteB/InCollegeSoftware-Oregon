@@ -16,7 +16,7 @@ def friendMenu(username):
         if line != '\n':
             u, fu = line.split('\t')
             temp = Friend(u, fu)
-            requested_friendList.append(temp)            
+            requested_friendList.append(temp)
     requestFile.close()
 
     show_network(username)
@@ -26,7 +26,7 @@ def friendMenu(username):
         print("")
         print("------------------------------------------")
         print("| '1' to show your network               |")
-        print("| '2' to search people and send reuqest  |")
+        print("| '2' to search people and send request  |")
         print("| '3' to disconnect network              |")
         print("| '0' to return to main page             |")
         print("------------------------------------------")
