@@ -122,8 +122,16 @@ def showProfileOptions_InputValidate1(userInput):
         else:
             return userInput
 
+def test():
+    friendFileWrite = open("friendList.txt", 'a')
+            
+    friendFileWrite.write("Student Learner" + '\t' +
+                    "Student2 Learner2" + '\n')
+    friendFileWrite.close()
 
-#friendList("user")
+
+test()
+friendList("user")
 
 
 def friendMenu(username):
