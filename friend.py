@@ -13,7 +13,8 @@ class Friend:
 
 #SHOW FRIEND LIST FUNCTION
 #login_name = username here hmm
-def friendList(username):
+#what is the username though? 
+def friendList1(username):
     profileExists = False
 
     friendWithProfileCount = 0
@@ -29,7 +30,10 @@ def friendList(username):
 
     for line in friendFile:
         if line != '\n':
+            line.rstrip()
             u, fu = line.split('\t')
+
+            print("u: " + u + ", fu: " + fu + "|")
             if (u == username or fu == username):
                 count_friend += 1
                 #user friend 
@@ -77,7 +81,7 @@ def friendList(username):
 
     profileFile.close()
     friendFile.close()  
-
+    print("friend: " + str(count_friend))
     if(count_friend == 0):
         print("| No friend to show                 |")
         print("-------------------------------------")
@@ -130,8 +134,8 @@ def test():
     friendFileWrite.close()
 
 
-test()
-friendList("user")
+#test()
+friendList1("Student2 Learner2")
 
 
 def friendMenu(username):
