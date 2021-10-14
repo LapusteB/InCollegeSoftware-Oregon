@@ -46,8 +46,9 @@ def test_has_not_max_users():
 
 def test_student_search_lastname():
     friendRequests = open("friend_requested.txt", "r").readlines()
-    fr = open("friendList.txt", "w")
-    fr.close()
+    fr = open("friendList.txt", "r").readlines()
+    fr0 = open("friendList.txt", "w")
+    fr0.close()
 
     set_keyboard_input(["2", "lastname", "Learner2", "y", "n", "0"])
     friend.friendMenu("Student Learner")
@@ -68,13 +69,19 @@ def test_student_search_lastname():
         fr1.write(request)
     fr1.close()
 
+    fr2 = open("friendList.txt", "w")
+    for friendPair in fr:
+        fr2.write(friendPair)
+    fr2.close()
+
     assert insertSuccess
 
 
 def test_student_search_university():
     friendRequests = open("friend_requested.txt", "r").readlines()
-    fr = open("friendList.txt", "w")
-    fr.close()
+    fr = open("friendList.txt", "r").readlines()
+    fr0 = open("friendList.txt", "w")
+    fr0.close()
 
     set_keyboard_input(["2", "university", "U", "y", "n", "0"])
     friend.friendMenu("Student Learner")
@@ -95,13 +102,19 @@ def test_student_search_university():
         fr1.write(request)
     fr1.close()
 
+    fr2 = open("friendList.txt", "w")
+    for friendPair in fr:
+        fr2.write(friendPair)
+    fr2.close()
+
     assert insertSuccess
 
 
 def test_student_search_major():
     friendRequests = open("friend_requested.txt", "r").readlines()
-    fr = open("friendList.txt", "w")
-    fr.close()
+    fr = open("friendList.txt", "r").readlines()
+    fr0 = open("friendList.txt", "w")
+    fr0.close()
 
     set_keyboard_input(["2", "major", "M", "y", "n", "0"])
     friend.friendMenu("Student Learner")
@@ -121,6 +134,11 @@ def test_student_search_major():
     for request in friendRequests:
         fr1.write(request)
     fr1.close()
+
+    fr2 = open("friendList.txt", "w")
+    for friendPair in fr:
+        fr2.write(friendPair)
+    fr2.close()
 
     assert insertSuccess
 
@@ -321,11 +339,11 @@ def test_disconnect():
     fl = open("friendList.txt", "r").readlines()
 
     file = open("friendList.txt", "w")
-    file.write("Student2 Learner2\tStudent Learner\n")
+    file.write("Student Learner\tStudent2 Learner2\n")
     file.close()
 
-    set_keyboard_input(["Student Learner"])
-    friend.disconnect_network("Student2 Learner2")
+    set_keyboard_input(["Student2 Learner2"])
+    friend.disconnect_network("Student Learner")
 
     friendList = open("friendList.txt", "r").readlines()
 
