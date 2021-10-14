@@ -29,6 +29,7 @@ def mainPage(nameofuser):
         print("| '4' for useful links              |")
         print("| '5' to go to your profile         |")
         print("| '6' to show your network          |")
+        print("| '7' to show your friendList       |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
         print("")

@@ -129,6 +129,7 @@ def profileMenu(username):
 def showProfile(userProfile):
     cmd = ""
     while (cmd != '0'):
+        #r+: r+ : Opens a file for reading and writing, placing the pointer at the beginning of the file
         f = open('profile_experience.txt', 'r+')
         f.truncate(0)
 

@@ -1,3 +1,8 @@
+from profile import Profile
+import profile as p
+#from profile import showProfile
+
+
 class Friend:
     def __init__(self, username, friend_username):
         self.username = username
@@ -5,6 +10,121 @@ class Friend:
     
     def __eq__(self, other):
         return self.friend_username == other.friend_username
+
+#SHOW FRIEND LIST FUNCTION
+#login_name = username here hmm
+def friendList(username):
+    profileExists = False
+
+    friendWithProfileCount = 0
+    friendWithProfileMap = {}
+
+    count_friend = -1
+    print("-------------------------------------")
+    print("| Friend List                       |")
+    
+    friendFile = open("friendList.txt", "r")
+    profileFile = open("profile.txt", "r")
+
+
+    for line in friendFile:
+        if line != '\n':
+            u, fu = line.split('\t')
+            if (u == username or fu == username):
+                count_friend += 1
+                #user friend 
+                #friend user
+                #when 1st user name is the user
+
+
+                if(u == username):
+                    #check if has profile: 
+                   
+                    for line in profileFile:
+                        if line != '\n':
+                            u, t, n, m, p = line.split('\t')
+                            profile = Profile(u, t, n, m, p)
+                            if (profile.name == fu):
+                                #userProfile = profile
+                                profileExists = True
+                                friendWithProfileCount +=1
+
+                    #profileFile.close()
+                    if(profileExists):
+                        friendWithProfileMap[friendWithProfileCount] = {fu}
+                        print("Friend username: " + fu + ", "+ count_friend +"(has profile)")
+                    else: print("Friend username: " + fu)
+                    # else does not have 
+
+                #when the 2nd username is the user
+                else:
+                    #check if friend has profile
+                    for line in profileFile:
+                        if line != '\n':
+                            u, t, n, m, p = line.split('\t')
+                            profile = Profile(u, t, n, m, p)
+                            if (profile.name == u):
+                                #userProfile = profile
+                                friendWithProfileCount +=1
+                                profileExists = True
+                    #profileFile.close()
+                    if(profileExists):
+                        friendWithProfileMap[friendWithProfileCount] = {u}
+                        print("Friend username: " + u  + ", "+ count_friend +"(has profile)")
+                    else: print("Friend username: " + u)
+                
+                profileExists = False
+
+    profileFile.close()
+    friendFile.close()  
+
+    if(count_friend == 0):
+        print("| No friend to show                 |")
+        print("-------------------------------------")
+    else:
+        #optionInput = input("Do you want to view friends' profile(yes/no): ")
+        #if optionInput == "yes":
+
+        profileInputSelect = input("| Enter the coresspond number next to the has profile to see the profile "
+                            + "or put -1 to exit|")
+        while( profileInputSelect !=  "-1"):
+
+            profileInputSelect = showProfileOptions_InputValidate1(profileInputSelect)
+
+            while int(profileInputSelect) > len(friendWithProfileMap):
+                profileInputSelect = input("Please put an integer corespond to a has profile selection")
+                
+
+            #selected a number in the range 
+            if profileInputSelect == -1:
+                #testing
+                print("exiting...")
+                return
+            else: 
+                for line in profileFile:
+                    if line != '\n':
+                        u, t, n, m, p = line.split('\t')
+                        profile = Profile(u, t, n, m, p)
+                        if (profile.name 
+                            == friendWithProfileMap[profileInputSelect]):
+                            userProfile = profile
+                profileFile.close()
+
+            p.showProfile(userProfile)
+
+def showProfileOptions_InputValidate1(userInput):
+    while True:
+        try:
+            int(userInput)
+        except ValueError:
+            userInput = input("Please input an valid integer options")
+            continue
+        else:
+            return userInput
+
+
+#friendList("user")
+
 
 def friendMenu(username):
     global requested_friendList, user
