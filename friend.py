@@ -356,7 +356,7 @@ def disconnect_network(username):
     aFile.close()
 
     delete = input("Which user would you like to be disconnected? ")
-    if(has_delete_user(delete) == False):
+    if(has_delete_user(delete, username) == False):
         print("The user is not friend with you")
         return
 
@@ -377,14 +377,14 @@ def disconnect_network(username):
     wFile.close() 
     
 
-def has_delete_user(delete):
+def has_delete_user(delete, username):
     friendFile = open("friendList.txt", "r")
     for line in friendFile:
         if line != '\n':
             u, fu = line.split('\t')
-            if (u == user and  fu == delete):
+            if (u == username and  fu == delete):
                 return True
-            elif(u == delete and fu == user):
+            elif(u == delete and fu == username):
                 return True             
     friendFile.close() 
     return False  
@@ -407,7 +407,7 @@ def has_pending_requests(username):
                     friendFileWrite = open("friendList.txt", 'a')
             
                     friendFileWrite.write(u + '\t' +
-                                    username)
+                                    username + '\n')
                     friendFileWrite.close()
                     
                     print("Friend request has been successfully accepted")
