@@ -339,7 +339,7 @@ def show_network(username):
     for line in friendFile:
         if line != '\n':
             u, fu = line.split('\t')
-            if (u == username or fu == username):
+            if (u == username or fu == username + '\n'):
                 count_friend += 1
                 if(u == username):
                     print("Friend username: " + fu)
@@ -356,7 +356,7 @@ def disconnect_network(username):
         if line != '\n':
             u, fu = line.split('\t')
             
-            if (u == username or fu == username):
+            if (u == username or fu == username + '\n'):
                 if(u == username):
                     print("Friend username: " + fu)
                 else:
@@ -376,11 +376,11 @@ def disconnect_network(username):
     for line in lines:
         if line != '\n':
             u, fu = line.split('\t')
-            if (u == username and fu == delete):
+            if (u == username and fu == delete +'\n'):
                 
                 print(fu + " has been disconnected from your friend list ")
                 break
-            elif(u == delete and fu == username):
+            elif(u == delete and fu == username + '\n'):
                 
                 print(u + " has been disconnected from your friend list ")
                 break
@@ -394,9 +394,9 @@ def has_delete_user(delete, username):
     for line in friendFile:
         if line != '\n':
             u, fu = line.split('\t')
-            if (u == username and  fu == delete):
+            if (u == username and  fu == delete + '\n'):
                 return True
-            elif(u == delete and fu == username):
+            elif(u == delete and fu == username + '\n'):
                 return True             
     friendFile.close() 
     return False  
