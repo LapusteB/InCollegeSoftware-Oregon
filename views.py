@@ -5,6 +5,7 @@ from os import name
 import usefulLinks
 import profile
 import friend
+import friendList
 
 
 def mainPage(nameofuser):
@@ -47,6 +48,8 @@ def mainPage(nameofuser):
             profile.profileMenu(name)
         elif (kbInput == '6'):
             friend.friendMenu(name)
+        elif (kbInput == '7'):
+            friendList.friendList1(name)
         elif (kbInput == '0'):
             return
         else:
