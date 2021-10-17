@@ -1,6 +1,8 @@
 import login
 import friend
 import builtins
+import friendList
+import testHelper
 
 input_values = []
 print_values = []
@@ -258,6 +260,7 @@ def test_show_network_empty_files():
                       "------------------------------------------",
                       "What would you like to do: "]
 
+
 def test_show_network_filled_files():
     friendList = open("friendList.txt", "r").readlines()
     friendRequest = open("friend_requested.txt", "r").readlines()
@@ -353,6 +356,61 @@ def test_disconnect():
     file1.close()
 
     assert len(friendList) == 0
+
+
+def test_friend_profile_shows():
+    open("friendList.txt", "w").close()
+    open("profile.txt", "w").close()
+    open("usernames.txt", "w").close()
+    open("profile_experience.txt", "w").close()
+    open("profile_education.txt", "w").close()
+
+    file = open("friendList.txt", "w")
+    file1 = open("profile.txt", "w")
+    file2 = open("usernames.txt")
+
+    file.write("Student Learner\tStudent2 Learner2\n")
+    file1.write("Student2 Learner2	title	Major 	University 	about me")
+    file2.write("StudentLearner\nStudent2Learner2")
+    testHelper.mock_input_output_start()
+    testHelper.set_input(["0", "-1", "exit"])
+    friendList.friendList1("Student Learner")
+
+    output = testHelper.get_output()
+
+    assert output == ["-------------------------------------",
+                      "| Friend List                       |",
+                      "    Friend name: Student2 Learner2, 0(has profile)",
+                      "| Enter the coresspond number next to the has profile to see friend profile or enter -1 to exit|",
+                      "", "-------------------------------------", "Student Learner", "-------------------------------------",
+                      "", "Student Learner", "", "Title: title", "Major: Major", "University: University",
+                      "About Me: about me", "Experience: ", "\nEducation: ", "-------------------------------------",
+                      "| Enter the coresspond number next to the has profile to see friend profile "
+                      + "or enter -1 to exit|", "exiting...", "Enter exit to return to mainPage"]
+    testHelper.mock_input_output_end()
+
+
+def test_profile_doesnt_show():
+    open("friendList.txt", "w").close()
+    open("profile.txt", "w").close()
+    open("usernames.txt", "w").close()
+    open("profile_experience.txt", "w").close()
+    open("profile_education.txt", "w").close()
+
+    file = open("friendList.txt", "w")
+    file2 = open("usernames.txt")
+
+    file.write("Student Learner\tStudent2 Learner2\n")
+    file2.write("StudentLearner\nStudent2Learner2")
+    friendList.friendList1("Student Learner")
+
+    output = testHelper.get_output()
+
+    assert output == ["-------------------------------------",
+                      "| Friend List                       |",
+                      "    Friend name: Student2 Learner2",
+                      "| Enter the coresspond number next to the has profile to see friend profile or enter -1 to exit|"]
+    testHelper.mock_input_output_end()
 
 
 def mock_input(s):
