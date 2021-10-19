@@ -76,8 +76,8 @@ def postNewJob():
 def has_max_jobs():
     count = 0
     for line in open("jobs.txt", "r"): count += 1
-    if count == 5 or count > 5:
-        print("All permitted jobs have been posted, please come back later." + "\n")
+    if count == 10 or count > 10:
+        print("All permitted jobs have been posted(10 jobs), please come back later." + "\n")
         return True
     return False
 
