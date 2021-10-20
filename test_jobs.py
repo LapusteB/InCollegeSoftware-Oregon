@@ -5,7 +5,7 @@ input_values = []
 print_values = []
 
 
-def test_has_max_users():
+def test_has_max_jobs():
     un = open("jobs.txt", "r").readlines()
     file = open("jobs.txt", "w")
 
@@ -16,7 +16,7 @@ def test_has_max_users():
     file.close()
     isTrue = views.has_max_jobs()
 
-    file1 = open("usernames.txt", "w")
+    file1 = open("jobs.txt", "w")
     for line in un:
         file1.write(line)
     file1.close()
