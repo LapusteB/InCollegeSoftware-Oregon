@@ -158,13 +158,46 @@ def skillsPage():
     if (kbInput == "b"):
         mainPage(name)
 
+def appliedJob():
+    print("applied jobs")
+def notAppliedJob():
+    print("not applied jobs:")
+
 
 def jobSearchPage():
     print("\n")
-    print("Job Search")
+    print("Job Search/ Internship")
+    print("------------")
+    print("List of all jobs")
     print("------------")
     a = "x"
 
+    jobFile = open("jobs.txt",'r')
+    jobList = []
+    for line in jobFile:
+        if line != '\n':
+            n, t, d, e, l, s = line.split('\t')
+            jobList.append(t)
+
+
+    #jobList = set(jobList)
+
+
+    jobOptionInput = input("Enter 'a' to see list of applied jobs or 'n' for list of jobs that you have not applied: ")
+    
+    if jobOptionInput == "a":
+        appliedJob()
+    elif jobOptionInput == "n":
+        notAppliedJob()
+
+    
+    print(*jobList, sep="\t")
+    print("------------")
+
+
+    
+
+    
     while (a != "0" and a != "1"):
         a = input("Press '0' to return or 1 to post a new job.")
         if a == "0":
@@ -173,6 +206,16 @@ def jobSearchPage():
             postNewJob()
         else:
             print("Please enter an available option!!\n")
+    
+
+
+
+
+
+#saveJob(name, title, description, employer, location, salary)
+#jobSearchPage()
+
+    
 
 
 def pageUnderConstruction():
