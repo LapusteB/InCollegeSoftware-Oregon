@@ -182,13 +182,14 @@ def jobSearchPage():
 
     #jobList = set(jobList)
 
-
+    '''
     jobOptionInput = input("Enter 'a' to see list of applied jobs or 'n' for list of jobs that you have not applied: ")
     
     if jobOptionInput == "a":
         appliedJob()
     elif jobOptionInput == "n":
         notAppliedJob()
+    '''
 
     
     print(*jobList, sep="\t")
