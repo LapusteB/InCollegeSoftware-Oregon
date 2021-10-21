@@ -1,11 +1,24 @@
-
-# call after successfully login:
-
 from os import name
 import usefulLinks
 import profile
 import friend
 import friendList
+
+savedJobsMap = {}
+savedJobsList = []
+savedJobsListObj = []
+jobList = []
+appliedJobsList = []
+unmarkJobsMap = {}
+countJob = 0
+
+class savedJob:
+    def __init__(self, studentName, title):
+        self.studentName = studentName
+        self.title = title
+    
+    def __eq__(self,other):
+        return self.studentName == other.studentName and self.title == other.title
 
 
 def mainPage(nameofuser):
@@ -80,7 +93,6 @@ def has_max_jobs():
         print("All permitted jobs have been posted(10 jobs), please come back later." + "\n")
         return True
     return False
-
 
 def createNewJob():
     print("")
@@ -163,63 +175,353 @@ def appliedJob():
 def notAppliedJob():
     print("not applied jobs:")
 
+def update_jobs_appliedJobs_and_savedJobs():
 
-def jobSearchPage():
-    print("\n")
-    print("Job Search/ Internship")
-    print("------------")
-    print("List of all jobs")
-    print("------------")
-    a = "x"
+    jobList.clear()
 
     jobFile = open("jobs.txt",'r')
-    jobList = []
     for line in jobFile:
         if line != '\n':
+            line = line.rstrip()
             n, t, d, e, l, s = line.split('\t')
             jobList.append(t)
 
+    jobFile.close()
 
-    #jobList = set(jobList)
+    #saved the applied jobs 
 
-    '''
-    jobOptionInput = input("Enter 'a' to see list of applied jobs or 'n' for list of jobs that you have not applied: ")
+    appliedJobsList.clear()
+
+    appliedJobsFile = open("appliedJobs.txt",'r')
+    for line in appliedJobsFile:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, d, e, l, s, start, end, des = line.split('\t')
+            if(n == name):
+                appliedJobsList.append(t)
+
+    appliedJobsFile.close()
+
+    #open the applied jobs 
+
+    savedJobsListObj.clear()
+    savedJobsList.clear()
+    file = open("savedJobs.txt",'r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t = line.split('\t')
+            if(n == name):
+                savedJobsObj = savedJob(name,t)
+                savedJobsListObj.append(savedJobsObj)
+                savedJobsList.append(t)
+
+    file.close()
+
+def update_after_savedJobsFile_change():
+    print("")
+
+    #open the applied jobs 
+    file = open("savedJobs.txt",'r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t = line.split('\t')
+            if(n == name):
+                savedJobsObj = savedJob(name,t)
+                savedJobsListObj.append(savedJobsObj)
+                savedJobsList.append(t)
+
+    file.close()
+
+def printJob():
+    global countJob
+    countJob = 0
     
-    if jobOptionInput == "a":
-        appliedJob()
-    elif jobOptionInput == "n":
-        notAppliedJob()
-    '''
-
+    for i in range(len(jobList)):      
+        if jobList[i] in appliedJobsList:
+            if jobList[i] in savedJobsList:
+                countJob +=1
+                savedJobsMap[int(countJob)] = {jobList[i]}
+                print( str(countJob) + ". "+ jobList[i] + " (applied),(saved)")
+            else: 
+                countJob +=1
+                unmarkJobsMap[int(countJob)] = {jobList[i]}
+                print( str(countJob) + ". "+ jobList[i] + " (applied)")
+        else:
+            if jobList[i] in savedJobsList:
+                countJob +=1
+                savedJobsMap[int(countJob)] = {jobList[i]}
+                print( str(countJob) + ". "+ jobList[i] + " (saved)")
+            else: 
+                countJob +=1
+                unmarkJobsMap[int(countJob)] = {jobList[i]}
+                print( str(countJob) + ". "+ jobList[i])
     
-    print(*jobList, sep="\t")
-    print("------------")
 
 
+
+def jobSearchPage():
+    global countJob
+
+    print("\n")
+    print("Job Search/ Internship")
+    print("------------------------------------")
+
+    check_if_applied_jobs_got_deleted()
+
+
+    #saved all the jobs
+    #refresh the jobs
+    update_jobs_appliedJobs_and_savedJobs()
     
+    if len(jobList) >= 1:
+        print("List of all jobs")
+    else: print("No job has been posted")
 
-    
-    while (a != "0" and a != "1"):
-        a = input("Press '0' to return or 1 to post a new job.")
+    printJob()
+    b = "x"
+
+    while( b != "-1"):
+        b = input("Enter 's' to save jobs, 'u' to unmark a job or " + 
+        "enter -1 to to see more options: ")
+        if b == "s":
+
+            c = "x"
+            while c != "-1":
+            
+                c = input("Enter the number coresspond to the job to save or -1 to exit: ")
+                if c == "-1":
+                    break
+
+                if int(c) in savedJobsMap or int(c) > len(savedJobsList) + 1:
+                    print("Please enter a number corespond to a unmarks job to save" +
+                    " or '-1' to exit saving")
+                else: 
+                    #saved jobs 
+
+                    #get the saved jobs from the map. 
+
+                    #create an obj
+                    jobTitle = str(unmarkJobsMap.get(int(c))).strip('{').strip('}').strip("'").rstrip()
+                    savedJobsObj1 = savedJob(name, jobTitle)
+                    
+                    #put in the saved maps
+                    savedJobsMap[int(c)] = {jobTitle}
+                    del unmarkJobsMap[int(c)]
+                    
+                    savedJobsListObj.append(savedJobsObj1)
+                    savedJobsList.append(jobTitle)
+                    
+
+                    #change the .txt file 
+                    f = open('savedJobs.txt', 'r+')
+                    f.truncate(0)
+                    f.close()
+
+                    file = open("savedJobs.txt", 'a')
+                    for obj in savedJobsListObj:
+                        file.write(obj.studentName + "\t" + obj.title + "\n")
+                    
+                    file.close()
+                    print("Job saved!!!")
+                    #update_jobs_appliedJobs_and_savedJobs()
+                    printJob()
+
+
+
+        elif b == "u":
+            c = "x"
+            while c != "-1":
+
+                c = input("Enter the number coresspond to the job to unmark or -1 to exit unmarking: ")
+                if c == "-1":
+                    break
+                if int(c) not in savedJobsMap:
+                    print("Please enter a number corespond to a unmarks job to save" +
+                    " or '-1' to exit")
+
+                #it is in the map
+                else: 
+                    #unmark 
+                    #remove the job by del in the obj list
+                    for job in savedJobsListObj:
+                        jobTitle = str(savedJobsMap.get(int(c))).strip('{').strip('}').strip("'").rstrip()
+
+                        if job.studentName == name and job.title == jobTitle:
+
+                            #remove from saved list
+                            savedJobsList.remove(job.title)
+
+                            #remove from saved maps
+                            del savedJobsMap[int(c)]
+                            #append to unmark map: 
+                            unmarkJobsMap[int(c)] = {job.title}
+                            unmark_savedJobsObj2 = savedJob(name, job.title)
+                            savedJobsListObj.remove(unmark_savedJobsObj2)
+                    
+                    #clear the txt old file
+                    f = open('savedJobs.txt', 'r+')
+                    f.truncate(0)
+                    f.close()
+
+                    file = open("savedJobs.txt", 'a')
+                    #write in new data for saveJobsList
+                    for obj in savedJobsListObj:
+                        file.write(obj.studentName + "\t" + obj.title + "\n")
+                        
+                    file.close()
+                    print("Job unmarked!!!")
+
+                    #some not necessary though. 
+                    printJob()
+                    #this change the saveJobsMap and unmark though: 
+
+    a = "x"
+
+    print("------------------------------------")
+
+    while (a != "0" and a != "1" and a != "2" and a != "3"):
+        a = input("Press '0' to return to mainPage," +
+        " '1' to post a new job, '2' to generate list of jobs applied or "
+        + "'3' to generate list of saved jobs: ")
         if a == "0":
             mainPage(name)
+            #return
         elif (a == "1"):
             postNewJob()
+        elif (a == "2"):
+            
+            appliedJobListGenerate()
+        elif (a == "3"):
+            savedJobListGenerate()
         else:
             print("Please enter an available option!!\n")
     
-
-
-
-
-
-#saveJob(name, title, description, employer, location, salary)
-#jobSearchPage()
-
     
+    
+def job_got_deleted_notification(jobName):
+    appliedJobsGotDeletedFile = open("appliedJobsDeleted.py",'a')
+    appliedJobsGotDeletedFile.write(name + '\t' + jobName +'\n')
+    appliedJobsGotDeletedFile.close()
 
+
+#need the name of the jobs
+def check_if_applied_jobs_got_deleted():
+    deletedJobsList = []
+    deletedJobsObjList = []
+
+    #the file got student name and job name; 
+    #if the student name and job name match then
+    appliedJobsGotDeletedFile = open("appliedJobsDeleted.txt",'r')
+    for line in appliedJobsGotDeletedFile:
+        if line != '\n':
+            #n for student name and t for job title
+            line = line.rstrip()
+            n,t = line.split('\t')
+            
+            if(n == name):
+                deletedJobsList.append(t)
+            else: 
+                other_user_applied_jobs_deleted = savedJob(n,t)
+                deletedJobsObjList.append(other_user_applied_jobs_deleted)
+    
+    appliedJobsGotDeletedFile.close()
+
+    f = open("appliedJobsDeleted.txt", 'r+')
+    f.truncate(0)
+    f.close()
+
+    #put back other user deleted jobs
+    file = open("appliedJobsDeleted.txt", 'a')
+    for obj in deletedJobsObjList:
+        file.write(obj.studentName + "\t" + obj.title + "\n")
+    file.close()
+
+    appliedJobsGotDeletedFile.close()
+
+
+    #print("list length: " + str(len(deletedJobsList)))
+    if len(deletedJobsList) >= 1:
+        print("Here are the job(s) You've applied for has(have) been deleted:")
+        print(*deletedJobsList,sep =', ')
+            
+            
+        print("------------------------------------")
+
+
+def appliedJobListGenerate():
+    
+    appliedJobsList = []
+    #open the applied jobs 
+    file = open("appliedJobs.txt",'r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, d, e, l, s, start, end, des = line.split('\t')
+            if(n == name):
+                appliedJobsList.append(t)
+
+    file.close()
+
+    print("List of applied jobs:")
+    print(*appliedJobsList, sep = ', ')
+
+    a = "x"
+    while a != "0":
+        a = input("Enter '0' to return to job search/ internship page")
+        if a != "0":
+            print("Please enter '0' to return")
+        else: jobSearchPage()
+    
+    print("------------------------------------")
+
+
+def savedJobListGenerate():
+    savedJobsList = []
+    #open the applied jobs 
+    file = open("savedJobs.txt",'r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t = line.split('\t')
+            if(n == name):
+                savedJobsList.append(t)
+
+    file.close()
+    
+    print("List of saved jobs:")
+    print(*savedJobsList, sep = ', ')
+
+    a = "x"
+    while a != "0":
+        a = input("Enter '0' to return to job search/ internship page")
+        if a != "0":
+            print("Please enter '0' to return")
+        else: jobSearchPage()
+    
+    print("------------------------------------")
+    
 
 def pageUnderConstruction():
     print("")
     print("--------------------------------------------------------")
     print("Page under construction")
+
+def makeAppliedJobsFile(n, t, d, e, l, s, start, end, des):
+    print("")
+    appliedJobFile = open("appliedJobs.txt",'a')
+    appliedJobFile.write(n + "\t" + t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\t" + start + "\t"
+                        + end + "\t" + des + "\n")
+
+    appliedJobFile.close()
+
+
+#name = "Student Learner"
+
+
+
+
+
+
+
