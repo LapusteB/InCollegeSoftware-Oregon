@@ -282,6 +282,7 @@ def jobSearchPage():
     printJob()
     b = "x"
 
+    #saved jobs and unmark jobs options
     while( b != "-1"):
         b = input("Enter 's' to save jobs, 'u' to unmark a job or " + 
         "enter -1 to to see more options: ")
@@ -379,6 +380,7 @@ def jobSearchPage():
 
     a = "x"
 
+    #generate list of appliedJobs and savedJobs
     print("------------------------------------")
 
     while (a != "0" and a != "1" and a != "2" and a != "3"):
@@ -399,14 +401,14 @@ def jobSearchPage():
             print("Please enter an available option!!\n")
     
     
-    
+
 def job_got_deleted_notification(jobName):
     appliedJobsGotDeletedFile = open("appliedJobsDeleted.py",'a')
     appliedJobsGotDeletedFile.write(name + '\t' + jobName +'\n')
     appliedJobsGotDeletedFile.close()
 
 
-#need the name of the jobs
+#check if applied jobs got deleted
 def check_if_applied_jobs_got_deleted():
     deletedJobsList = []
     deletedJobsObjList = []
