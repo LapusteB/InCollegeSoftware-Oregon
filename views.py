@@ -284,7 +284,7 @@ def jobSearchPage():
 
     #saved jobs and unmark jobs options
     while( b != "-1"):
-        b = input("Enter 's' to save jobs, 'u' to unmark a job or " + 
+        b = input("Enter 'a' to appy for jobs, Enter 's' to save jobs, 'u' to unmark a job or " + 
         "enter -1 to to see more options: ")
         if b == "s":
 
@@ -328,7 +328,14 @@ def jobSearchPage():
                     print("Job saved!!!")
                     #update_jobs_appliedJobs_and_savedJobs()
                     printJob()
-
+        elif b =="a":
+            j=0
+            
+            while(j!=1):
+                sel = input("Enter the name of the job you want to apply to: ")    
+                if (sel in jobList):
+                    jobApplication(sel)
+                    j=1
 
 
         elif b == "u":
@@ -399,7 +406,22 @@ def jobSearchPage():
             savedJobListGenerate()
         else:
             print("Please enter an available option!!\n")
+
+def jobApplication(title):
+
+    print("----------JOB APPLICATION----------")
+    n = input("Enter your first name: ")
+    g = input("Enter your graduation date Ex:(mm/dd/yyyy): ")
+    s = input("Enter the day you can start Ex:(mm/dd/yyyy): ")
+    d = input("Describe why you feel fit for the job: ")
     
+    saveJobApp(title, n, g, s, d)
+    
+
+def saveJobApp(title, n, g, s, d):
+    file5 = open("appliedJobs.txt", "a")
+    file5.write(title + "\t" + n +"\t" + g + "\t" + s + "\t" + d + "\n" )
+    file5.close()
     
 
 def job_got_deleted_notification(jobName):
