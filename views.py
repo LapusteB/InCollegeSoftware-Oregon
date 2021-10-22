@@ -537,9 +537,9 @@ def notAppliedJobsListGenerator():
     jobFile.close()
 
     print("List of jobs that has been applied to:")
-    for i in range(len(appliedJobsList)): 
-        if appliedJobsList[i] in jobList:
-            print(str(appliedJobsList[i]))
+    for i in range(len(jobList)): 
+        if jobList[i] not in appliedJobsList:
+            print(str(jobList[i]))
 
     a = "x"
     while a != "0":
