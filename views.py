@@ -196,7 +196,7 @@ def update_jobs_appliedJobs_and_savedJobs():
     for line in appliedJobsFile:
         if line != '\n':
             line = line.rstrip()
-            n, t, d, e, l, s, start, end, des = line.split('\t')
+            n, t, start, end, des = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
@@ -482,7 +482,7 @@ def appliedJobListGenerate():
     for line in file:
         if line != '\n':
             line = line.rstrip()
-            n, t, d, e, l, s, start, end, des = line.split('\t')
+            n, t, start, end, des = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
@@ -532,16 +532,6 @@ def pageUnderConstruction():
     print("--------------------------------------------------------")
     print("Page under construction")
 
-def makeAppliedJobsFile(n, t, d, e, l, s, start, end, des):
-    print("")
-    appliedJobFile = open("appliedJobs.txt",'a')
-    appliedJobFile.write(n + "\t" + t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\t" + start + "\t"
-                        + end + "\t" + des + "\n")
-
-    appliedJobFile.close()
-
-
-#name = "Student Learner"
 
 
 
