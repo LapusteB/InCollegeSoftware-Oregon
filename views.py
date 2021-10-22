@@ -407,17 +407,17 @@ def jobSearchPage():
 def jobApplication(title):
 
     print("----------JOB APPLICATION----------")
-    n = input("Enter your first name: ")
+  
     g = input("Enter your graduation date Ex:(mm/dd/yyyy): ")
     s = input("Enter the day you can start Ex:(mm/dd/yyyy): ")
     d = input("Describe why you feel fit for the job: ")
     
-    saveJobApp(title, n, g, s, d)
+    saveJobApp(name, title, g, s, d)
     
 
-def saveJobApp(title, n, g, s, d):
+def saveJobApp(name, title, g, s, d):
     file5 = open("appliedJobs.txt", "a")
-    file5.write(title + "\t" + n +"\t" + g + "\t" + s + "\t" + d + "\n" )
+    file5.write(name + "\t" + title + +"\t" + g + "\t" + s + "\t" + d + "\n" )
     file5.close()
     
 
