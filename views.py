@@ -170,6 +170,20 @@ def skillsPage():
     if (kbInput == "b"):
         mainPage(name)
 
+def update_appliedJobs():
+    appliedJobsList.clear()
+
+    appliedJobsFile = open("appliedJobs.txt",'r')
+    for line in appliedJobsFile:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, start, end, des = line.split('\t')
+            if(n == name):
+                appliedJobsList.append(t)
+
+    appliedJobsFile.close()
+
+
 def update_jobs_appliedJobs_and_savedJobs():
 
     jobList.clear()
@@ -330,6 +344,7 @@ def jobSearchPage():
                 sel = input("Enter the name of the job you want to apply to: ")    
                 if (sel in jobList):
                     jobApplication(sel)
+                    update_appliedJobs()
                     j=1
 
 
