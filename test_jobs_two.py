@@ -44,25 +44,17 @@ def test_save_jobs():
 def test_applied_jobs_indicator():
     jobs = open("jobs.txt", "r").readlines()
     appliedJobs = open("appliedJobs.txt", "r").readlines()
+    savedJobs = open("savedJobs.txt", "r").readlines()
     jobs0 = open("jobs.txt", "w")
     jobs0.write("\nStudent Learner\tworker\twork alot\tusf\ttampa\t1")
     jobs0.close()
     appliedJobs0 = open("appliedJobs.txt", "w")
+    appliedJobs0.write("Student Learner\tworker\twork alot\tusf\ttampa\t1\tstart date\tendate\tdes")
     appliedJobs0.close()
+    savedJobs0 = open("savedJobs.txt", "w")
+    savedJobs0.close()
 
-    set_keyboard_input(["user", "P@ssword1", "3", "s", "1", "1", "-1", "-1", "0", "0", "0"])
-    login.login("Student Learner")
-
-    assert True
-
-
-def test_show_jobs():
-    jobs = open("jobs.txt", "r").readlines()
-    jobs0 = open("jobs.txt", "w")
-    jobs0.write("\nStudent Learner\tworker\twork alot\tusf\ttampa\t1")
-    jobs0.close()
-
-    set_keyboard_input(["3", "-1", "0", "0", "0", "0"])
+    set_keyboard_input(["3", "-1", "0", "0", "0"])
     views.mainPage("Student Learner")
 
     output = get_display_output()
@@ -71,6 +63,16 @@ def test_show_jobs():
     for job in jobs:
         jobs1.write(job)
     jobs1.close()
+
+    appliedJobs1 = open("appliedJobs.txt", "w")
+    for appliedJob in appliedJobs:
+        appliedJobs1.write(appliedJob)
+    appliedJobs1.close()
+
+    savedJobs1 = open("savedJobs.txt", "w")
+    for savedJob in savedJobs:
+        savedJobs1.write(savedJob)
+    savedJobs1.close()
 
     assert output == ["",
                       "*************",
@@ -94,7 +96,105 @@ def test_show_jobs():
                       "Job Search/ Internship",
                       "------------------------------------",
                       "List of all jobs",
-                      "1. worker (applied),(saved)",
+                      "1. worker (applied)",
+                      "Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
+                      "------------------------------------",
+                      "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied or '3' to generate list of saved jobs: ",
+                      "",
+                      "*************",
+                      "* InCollege *",
+                      "*************",
+                      "",
+                      "Main page",
+                      "------------------------------------",
+                      "| '1' to find someone you know      |",
+                      "| '2' for learn new skill           |",
+                      "| '3' for job search/ internship    |",
+                      "| '4' for useful links              |",
+                      "| '5' to go to your profile         |",
+                      "| '6' to show your network          |",
+                      "| '7' to show your friendList       |",
+                      "| '0' to return to login            |",
+                      "-------------------------------------",
+                      "",
+                      "Enter page you want to go to: ",
+                      "",
+                      "*************",
+                      "* InCollege *",
+                      "*************",
+                      "",
+                      "Main page",
+                      "------------------------------------",
+                      "| '1' to find someone you know      |",
+                      "| '2' for learn new skill           |",
+                      "| '3' for job search/ internship    |",
+                      "| '4' for useful links              |",
+                      "| '5' to go to your profile         |",
+                      "| '6' to show your network          |",
+                      "| '7' to show your friendList       |",
+                      "| '0' to return to login            |",
+                      "-------------------------------------",
+                      "",
+                      "Enter page you want to go to: "]
+
+
+def test_show_jobs():
+    jobs = open("jobs.txt", "r").readlines()
+    jobs0 = open("jobs.txt", "w")
+    jobs0.write("\nStudent Learner\tworker\twork alot\tusf\ttampa\t1")
+    jobs0.close()
+
+    savedJobs = open("savedJobs.txt", "r").readlines()
+    savedJobs0 = open("savedJobs.txt", "w")
+    savedJobs0.close()
+
+    appliedJobs = open("appliedJobs.txt", "r").readlines()
+    appliedJobs0 = open("appliedJobs.txt", "w")
+    appliedJobs0.close()
+
+    set_keyboard_input(["3", "-1", "0", "0", "0", "0"])
+    views.mainPage("Student Learner")
+
+    output = get_display_output()
+
+    jobs1 = open("jobs.txt", "w")
+    for job in jobs:
+        jobs1.write(job)
+    jobs1.close()
+
+    savedJobs1 = open("savedJobs.txt", "w")
+    for savedJob in savedJobs:
+        savedJobs1.write(savedJob)
+    savedJobs1.close()
+
+    appliedJobs1 = open("appliedJobs.txt", "w")
+    for appliedJob in appliedJobs:
+        appliedJobs1.write(appliedJob)
+    appliedJobs1.close()
+
+    assert output == ["",
+                      "*************",
+                      "* InCollege *",
+                      "*************",
+                      "",
+                      "Main page",
+                      "------------------------------------",
+                      "| '1' to find someone you know      |",
+                      "| '2' for learn new skill           |",
+                      "| '3' for job search/ internship    |",
+                      "| '4' for useful links              |",
+                      "| '5' to go to your profile         |",
+                      "| '6' to show your network          |",
+                      "| '7' to show your friendList       |",
+                      "| '0' to return to login            |",
+                      "-------------------------------------",
+                      "",
+                      "Enter page you want to go to: ",
+                      "\n",
+                      "Job Search/ Internship",
+                      "------------------------------------",
+                      "List of all jobs",
+                      "1. worker",
                       "Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
                       "------------------------------------",
                       "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied or '3' to generate list of saved jobs: ",
