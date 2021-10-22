@@ -170,11 +170,6 @@ def skillsPage():
     if (kbInput == "b"):
         mainPage(name)
 
-def appliedJob():
-    print("applied jobs")
-def notAppliedJob():
-    print("not applied jobs:")
-
 def update_jobs_appliedJobs_and_savedJobs():
 
     jobList.clear()
@@ -387,23 +382,25 @@ def jobSearchPage():
 
     a = "x"
 
-    #generate list of appliedJobs and savedJobs
+    #generate list of appliedJobs and savedJobs and not yet applied jobs.
     print("------------------------------------")
 
     while (a != "0" and a != "1" and a != "2" and a != "3"):
         a = input("Press '0' to return to mainPage," +
-        " '1' to post a new job, '2' to generate list of jobs applied or "
-        + "'3' to generate list of saved jobs: ")
+        " '1' to post a new job, '2' to generate list of jobs applied, "
+        + "'3' to generate list of saved jobs or " + 
+        " '4' to generate list of jobs that you have not applied yet: ")
         if a == "0":
             mainPage(name)
             #return
         elif (a == "1"):
             postNewJob()
         elif (a == "2"):
-            
             appliedJobListGenerate()
         elif (a == "3"):
             savedJobListGenerate()
+        elif (a == "4"):
+            notAppliedJobsListGenerator()
         else:
             print("Please enter an available option!!\n")
 
@@ -490,6 +487,44 @@ def appliedJobListGenerate():
 
     print("List of applied jobs:")
     print(*appliedJobsList, sep = ', ')
+
+    a = "x"
+    while a != "0":
+        a = input("Enter '0' to return to job search/ internship page")
+        if a != "0":
+            print("Please enter '0' to return")
+        else: jobSearchPage()
+    
+    print("------------------------------------")
+
+def notAppliedJobsListGenerator():
+    appliedJobsList = []
+    jobList = []
+
+    #open the applied jobs 
+    file = open("appliedJobs.txt",'r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, start, end, des = line.split('\t')
+            if(n == name):
+                appliedJobsList.append(t)
+
+    file.close()
+
+    jobFile = open("jobs.txt",'r')
+    for line in jobFile:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, d, e, l, s = line.split('\t')
+            jobList.append(t)
+
+    jobFile.close()
+
+    print("List of jobs that has been applied to:")
+    for i in range(len(appliedJobsList)): 
+        if appliedJobsList[i] in jobList:
+            print(str(appliedJobsList[i]))
 
     a = "x"
     while a != "0":
