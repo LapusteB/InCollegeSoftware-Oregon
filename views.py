@@ -11,6 +11,7 @@ jobList = []
 appliedJobsList = []
 unmarkJobsMap = {}
 countJob = 0
+JobsListName = []
 
 class savedJob:
     def __init__(self, studentName, title):
@@ -339,14 +340,35 @@ def jobSearchPage():
                     printJob()
         elif b =="a":
             j=0
-            
+           
             while(j!=1):
-                sel = input("Enter the name of the job you want to apply to: ")    
-                if (sel in jobList):
-                    displayJob(sel)
-                    jobApplication(sel)
-                    update_appliedJobs()
-                    j=1
+                sel = input("Enter the name of the job you want to apply to: ")
+                with open('jobs.txt','r') as f:
+                    lines = f.read().split("\n")
+                    for line in lines:
+                        if name in line:
+                            print("Error, You listed this job as an employer: " + name)
+                            j=1
+                            break
+                    if j == 1:
+                        break
+
+                    for line in lines:
+                        if sel in appliedJobsList: # or word in line.split() to search for full words
+                            print("Error, You have already applied to this job: " + sel)
+                            j=1
+                            break
+                        elif name in line:
+                            print("Error, You listed this job as an employer: " + name)
+                            j=1
+                            break
+                        else:
+                            if (sel in jobList):
+                                displayJob(sel)
+                                jobApplication(sel)
+                                update_appliedJobs()
+                                j=1
+                                break
 
 
         elif b == "u":

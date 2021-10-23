@@ -1,2 +1,6 @@
 Student Learner	worker	work alot	usf	tampa	1
 sf	job name	cool	cool	cool	cool
+B L	plumber	toilet	Gman	tampa	34
+B L	teacher	teach\	usf	tampa	34
+B L	newJob	do	usf	tampa	343
+BR LA	finalJob	dothis	Guy	tampa	232
