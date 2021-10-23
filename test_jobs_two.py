@@ -1,6 +1,7 @@
 import builtins
 import login
 import views
+import testBaseEpic6
 
 input_values = []
 print_values = []
@@ -235,7 +236,21 @@ def test_show_jobs():
                       "",
                       "Enter page you want to go to: "]
 
+def test_applied_jobs_got_deleted():
+    print_values.clear()
+    fr = open("appliedJobsDeleted.txt", "w")
+    fr.write("Student Learner\tSoftware Engineer\n")
+    fr.close()
+    
+    testBaseEpic6.check_if_applied_jobs_got_deleted("Student Learner")
 
+    output = get_display_output()
+
+    assert output == ["Here are the job(s) You've applied for has(have) been deleted:",
+                        "Software Engineer",
+                        "------------------------------------"]
+
+    
 def mock_input(s):
     print_values.append(s)
     return input_values.pop(0)
