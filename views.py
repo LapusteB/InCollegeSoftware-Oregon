@@ -425,8 +425,8 @@ def jobSearchPage():
 
     while (a != "0" and a != "1" and a != "2" and a != "3"):
         a = input("Press '0' to return to mainPage," +
-        " '1' to post a new job, '2' to generate list of jobs applied, "
-        + "'3' to generate list of saved jobs or " + 
+        " '1' to post a new job, '2' to generate list of jobs applied, '7' to DELETE A JOB,  "
+        + "\n'3' to generate list of saved jobs or " + 
         " '4' to generate list of jobs that you have not applied yet: ")
         if a == "0":
             mainPage(name)
@@ -439,8 +439,58 @@ def jobSearchPage():
             savedJobListGenerate()
         elif (a == "4"):
             notAppliedJobsListGenerator()
+        elif (a == "7"):
+            deleteJOB()
         else:
             print("Please enter an available option!!\n")
+
+def deleteJOB():
+    print("\n----------JOB DELETION--------")
+    sel = input("Enter the name of the job you want to delete: ")
+    
+    a_file = open("jobs.txt", "r")
+
+
+    lines = a_file.readlines()
+    a_file.close()
+
+    for i in lines:
+        if sel in lines:
+            del lines[i]
+    
+    new_file = open("jobs.txt", "w+")
+    for line in lines:
+        new_file.write(line)
+
+    new_file.close()
+    
+    print("-----JOB Deleted------\n")
+    '''
+    a_file = open("jobs.txt", "r")
+
+    lines = a_file.readlines()
+    a_file.close()
+
+    new_file = open("jobs.txt", "w")
+    for line in lines:
+        if line.strip("\n") != sel:
+            new_file.write(line)
+            break
+        
+    new_file.close()
+    '''
+
+    '''
+    sel = input("Enter the name of the job you want to delete: ")
+    with open("jobs.txt", "r") as f:
+        lines = f.readlines()
+    with open("jobs.txt", "w") as f:
+        for line in lines:
+            if line.strip("\n") == sel:
+                f.write(line)
+                '''
+        
+
 
 def displayJob(title):
     print("\n----------JOB DESCRIPTION----------")
