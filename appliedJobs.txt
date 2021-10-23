@@ -1,2 +1,1 @@
-b l	job name	07/21/69	69/69/69	im good
-
+B L	job name	2000	2000	good

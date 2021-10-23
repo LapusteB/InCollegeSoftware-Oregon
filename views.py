@@ -343,7 +343,7 @@ def jobSearchPage():
             while(j!=1):
                 sel = input("Enter the name of the job you want to apply to: ")    
                 if (sel in jobList):
-                    #displayJob(sel)
+                    displayJob(sel)
                     jobApplication(sel)
                     update_appliedJobs()
                     j=1
@@ -421,11 +421,23 @@ def jobSearchPage():
             print("Please enter an available option!!\n")
 
 def displayJob(title):
-    file5 = open("jobs.txt")
-    content = file5.read()
-    if (title in content):
-        while(content != "\n"):
-            print(content)
+    print("\n----------JOB DESCRIPTION----------")
+    wordList = []
+    
+    with open('jobs.txt','r') as f:
+        lines = f.read().split("\n")
+
+    for line in lines:
+        if title in line: # or word in line.split() to search for full words
+            wordList = line.split("\t")
+            
+    #print(wordList)
+    print("Title: " + wordList[0])
+    print("Description: "+ wordList[1])
+    print("Employer: " + wordList[2])
+    print("Location: " + wordList[3])
+    print("Salary: " + wordList[4])
+    
 
 def jobApplication(title):
 
