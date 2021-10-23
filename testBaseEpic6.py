@@ -539,6 +539,26 @@ def notAppliedJobsListGenerator(name):
     print("------------------------------------")
 
 
+def displayJob(title):
+    i = input("")
+    print("\n----------JOB DESCRIPTION----------")
+    wordList = []
+
+    with open('jobs.txt', 'r') as f:
+        lines = f.read().split("\n")
+
+    for line in lines:
+        if title in line:  # or word in line.split() to search for full words
+            wordList = line.split("\t")
+
+    # print(wordList)
+    print("Title: " + wordList[1])
+    print("Description: " + wordList[2])
+    print("Employer: " + wordList[3])
+    print("Location: " + wordList[4])
+    print("Salary: " + wordList[5])
+
+
 def savedJobListGenerate(name):
     savedJobsList = []
     #open the applied jobs 

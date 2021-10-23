@@ -432,10 +432,10 @@ def displayJob(title):
             wordList = line.split("\t")
             
     #print(wordList)
-    print("Title: " + wordList[0])
-    print("Description: "+ wordList[1])
-    print("Employer: " + wordList[2])
-    print("Location: " + wordList[3])
+    print("Title: " + wordList[1])
+    print("Description: "+ wordList[2])
+    print("Employer: " + wordList[3])
+    print("Location: " + wordList[4])
     print("Salary: " + wordList[4])
     
 

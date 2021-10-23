@@ -9,13 +9,15 @@ print_values = []
 def test_save_jobs():
     jobs = open("jobs.txt", "r").readlines()
     savedJobs = open("savedJobs.txt", "r").readlines()
+
     jobs0 = open("savedJobs.txt", "w")
-    jobs0.write("\nStudent Learner\tworker\twork alot\tusf\ttampa\t1")
+    jobs0.write("Student Learner2\tworker\tD\tE\tL\tS")
     jobs0.close()
+
     savedJobs0 = open("savedJobs.txt", "w")
     savedJobs0.close()
 
-    set_keyboard_input(["3", "s", "1", "1", "-1", "-1", "0", "0", "0"])
+    set_keyboard_input(["3", "s", "1", "-1", "-1", "0", "0", "0"])
     views.mainPage("Student Learner")
 
     insertSuccess = False
@@ -47,10 +49,10 @@ def test_applied_jobs_indicator():
     appliedJobs = open("appliedJobs.txt", "r").readlines()
     savedJobs = open("savedJobs.txt", "r").readlines()
     jobs0 = open("jobs.txt", "w")
-    jobs0.write("\nStudent Learner\tworker\twork alot\tusf\ttampa\t1")
+    jobs0.write("\nStudent Learner2\tengineering worker\tD\tE\tL\tS")
     jobs0.close()
     appliedJobs0 = open("appliedJobs.txt", "w")
-    appliedJobs0.write("Student Learner\tworker\twork alot\tusf\ttampa\t1\tstart date\tendate\tdes")
+    appliedJobs0.write("Student Learner\tengineering worker\tstart date\tendate\tdes")
     appliedJobs0.close()
     savedJobs0 = open("savedJobs.txt", "w")
     savedJobs0.close()
@@ -97,10 +99,10 @@ def test_applied_jobs_indicator():
                       "Job Search/ Internship",
                       "------------------------------------",
                       "List of all jobs",
-                      "1. worker (applied)",
-                      "Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
+                      "1. engineering worker (applied)",
+                      "Enter 'a' to appy for jobs, Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
                       "------------------------------------",
-                      "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied or '3' to generate list of saved jobs: ",
+                      "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied, '3' to generate list of saved jobs or  '4' to generate list of jobs that you have not applied yet: ",
                       "",
                       "*************",
                       "* InCollege *",
@@ -196,9 +198,9 @@ def test_show_jobs():
                       "------------------------------------",
                       "List of all jobs",
                       "1. worker",
-                      "Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
+                      "Enter 'a' to appy for jobs, Enter 's' to save jobs, 'u' to unmark a job or enter -1 to to see more options: ",
                       "------------------------------------",
-                      "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied or '3' to generate list of saved jobs: ",
+                      "Press '0' to return to mainPage, '1' to post a new job, '2' to generate list of jobs applied, '3' to generate list of saved jobs or  '4' to generate list of jobs that you have not applied yet: ",
                       "",
                       "*************",
                       "* InCollege *",
@@ -235,6 +237,76 @@ def test_show_jobs():
                       "-------------------------------------",
                       "",
                       "Enter page you want to go to: "]
+
+
+def test_apply_to_job():
+    jobs = open("jobs.txt", "r").readlines()
+    appliedJobs = open("appliedJobs.txt", "r").readlines()
+    savedJobs = open("savedJobs.txt", "r").readlines()
+
+    jobs0 = open("jobs.txt", "w")
+    jobs0.write("\nStudent Learner2\tengineering worker\tD\tE\tL\tS")
+    jobs0.close()
+    appliedJobs0 = open("appliedJobs.txt", "w")
+    appliedJobs0.close()
+    savedJobs0 = open("savedJobs.txt", "w")
+    savedJobs0.close()
+
+    set_keyboard_input(["3", "a", "engineering worker", "05/31/2022", "06/01/2022", "Smart boi", "-1", "0", "0", "0"])
+    views.mainPage("Student Learner")
+
+    insertSuccess = True
+    applied = open("appliedJobs.txt", "r")
+    for line in applied:
+        if line != '\n':
+            s, j, d, e, f = line.split('\t')
+            if s == "Student Learner":
+                if j == "engineering worker\n":
+                    if d == "05/31/2022":
+                        if e == "06/01/2022":
+                            if f == "Smart boi":
+                                insertSuccess = True
+                                break
+
+    jobs1 = open("jobs.txt", "w")
+    for job in jobs:
+        jobs1.write(job)
+    jobs1.close()
+
+    appliedJobs1 = open("appliedJobs.txt", "w")
+    for appliedJob in appliedJobs:
+        appliedJobs1.write(appliedJob)
+    appliedJobs1.close()
+
+    savedJobs1 = open("savedJobs.txt", "w")
+    for savedJob in savedJobs:
+        savedJobs1.write(savedJob)
+    savedJobs1.close()
+
+
+def test_job_description():
+    jobs = open("jobs.txt", "r").readlines()
+    jobs0 = open("jobs.txt", "w")
+    jobs0.write("Student Learner2\tworker\tD\tE\tL\tS")
+    jobs0.close()
+
+    set_keyboard_input(["1"])
+    testBaseEpic6.displayJob("worker")
+    output = get_display_output()
+
+    jobs1 = open("jobs.txt", "w")
+    for job in jobs:
+        jobs1.write(job)
+    jobs1.close()
+
+    assert output == ["",
+                      "\n----------JOB DESCRIPTION----------",
+                      "Title: worker",
+                      "Description: D",
+                      "Employer: E",
+                      "Location: L",
+                      "Salary: S"]
+
 
 def test_applied_jobs_got_deleted():
     print_values.clear()
