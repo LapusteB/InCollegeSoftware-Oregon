@@ -486,7 +486,7 @@ def check_if_applied_jobs_got_deleted(name):
         print("------------------------------------")
 
 
-def appliedJobListGenerate():
+def appliedJobListGenerate(name):
     
     appliedJobsList = []
     #open the applied jobs 
@@ -501,18 +501,12 @@ def appliedJobListGenerate():
     file.close()
 
     print("List of applied jobs:")
-    print(*appliedJobsList, sep = ', ')
+    print(*appliedJobsList, sep=', ')
 
-    a = "x"
-    while a != "0":
-        a = input("Enter '0' to return to job search/ internship page")
-        if a != "0":
-            print("Please enter '0' to return")
-        else: jobSearchPage()
-    
+
     print("------------------------------------")
 
-def notAppliedJobsListGenerator():
+def notAppliedJobsListGenerator(name):
     appliedJobsList = []
     jobList = []
 
@@ -541,17 +535,11 @@ def notAppliedJobsListGenerator():
         if jobList[i] not in appliedJobsList:
             print(str(jobList[i]))
 
-    a = "x"
-    while a != "0":
-        a = input("Enter '0' to return to job search/ internship page")
-        if a != "0":
-            print("Please enter '0' to return")
-        else: jobSearchPage()
     
     print("------------------------------------")
 
 
-def savedJobListGenerate():
+def savedJobListGenerate(name):
     savedJobsList = []
     #open the applied jobs 
     file = open("savedJobs.txt",'r')
@@ -567,13 +555,7 @@ def savedJobListGenerate():
     print("List of saved jobs:")
     print(*savedJobsList, sep = ', ')
 
-    a = "x"
-    while a != "0":
-        a = input("Enter '0' to return to job search/ internship page")
-        if a != "0":
-            print("Please enter '0' to return")
-        else: jobSearchPage()
-    
+        
     print("------------------------------------")
     
 
