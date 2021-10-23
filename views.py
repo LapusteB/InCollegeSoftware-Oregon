@@ -343,6 +343,7 @@ def jobSearchPage():
             while(j!=1):
                 sel = input("Enter the name of the job you want to apply to: ")    
                 if (sel in jobList):
+                    #displayJob(sel)
                     jobApplication(sel)
                     update_appliedJobs()
                     j=1
@@ -419,20 +420,27 @@ def jobSearchPage():
         else:
             print("Please enter an available option!!\n")
 
+def displayJob(title):
+    file5 = open("jobs.txt")
+    content = file5.read()
+    if (title in content):
+        while(content != "\n"):
+            print(content)
+
 def jobApplication(title):
 
-    print("----------JOB APPLICATION----------")
+    print("\n----------JOB APPLICATION----------")
   
     g = input("Enter your graduation date Ex:(mm/dd/yyyy): ")
     s = input("Enter the day you can start Ex:(mm/dd/yyyy): ")
     d = input("Describe why you feel fit for the job: ")
-    
+    print("----------APPLICATION SUBMITTED!!!----------\n")
     saveJobApp(name, title, g, s, d)
     
 
 def saveJobApp(name, title, g, s, d):
     file5 = open("appliedJobs.txt", "a")
-    file5.write(name + "\t" + title + +"\t" + g + "\t" + s + "\t" + d + "\n" )
+    file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\n" )
     file5.close()
     
 
