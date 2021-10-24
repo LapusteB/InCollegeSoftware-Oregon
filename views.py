@@ -450,6 +450,7 @@ def deleteJOB():
     
     a_file = open("jobs.txt", "r")
 
+    localApliedJobsObjList = []
 
     lines = a_file.readlines()
     a_file.close()
@@ -457,7 +458,21 @@ def deleteJOB():
     for i in lines:
         if sel in lines:
             del lines[i]
-    
+            
+            #put deleted jobs in appliedJobs
+            #open the applied jobs, get all the jobs
+            f = open("appliedJobs.txt", 'r')
+            for l in f:
+                if l != '\n':
+                    l = l.rstrip()
+                    n,t, start, end, des = l.split('\t')
+                    # if the title is the same put in the appliedJobsDeleted
+                    if t == lines[i]:
+                        job_got_deleted_notification(n,t)
+                    
+            #close file
+            f.close()
+
     new_file = open("jobs.txt", "w+")
     for line in lines:
         new_file.write(line)
@@ -528,9 +543,9 @@ def saveJobApp(name, title, g, s, d):
     file5.close()
     
 
-def job_got_deleted_notification(jobName):
+def job_got_deleted_notification(userName,jobName):
     appliedJobsGotDeletedFile = open("appliedJobsDeleted.py",'a')
-    appliedJobsGotDeletedFile.write(name + '\t' + jobName +'\n')
+    appliedJobsGotDeletedFile.write(userName + '\t' + jobName +'\n')
     appliedJobsGotDeletedFile.close()
 
 
