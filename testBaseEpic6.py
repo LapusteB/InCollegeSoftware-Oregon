@@ -577,8 +577,32 @@ def savedJobListGenerate(name):
 
         
     print("------------------------------------")
-    
 
+def checkApplyJobs(name):
+    appliedJobsList = []
+    appliedJobsFile = open("appliedJobs.txt",'r')
+    for line in appliedJobsFile:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, start, end, des = line.split('\t')
+            if(n == name):
+                appliedJobsList.append(t)
+
+    appliedJobsFile.close()
+
+    sel = input("Enter the name of the job you want to apply to: ")
+    with open('jobs.txt','r') as f:
+        lines = f.read().split("\n")
+        for line in lines:
+            if sel in appliedJobsList: # or word in line.split() to search for full words
+                print("Error, You have already applied to this job: " + sel)
+                    
+                break
+            elif name in line:
+                print("Error, You listed this job as an employer: " + name)
+                    
+                break
+   
 def pageUnderConstruction():
     print("")
     print("--------------------------------------------------------")

@@ -371,8 +371,8 @@ def test_notappliedjoblist():
 
 def test_savedjoblist():
     print_values.clear()
-    appliedJobs = open("savedJobs.txt", "w")
-    appliedJobs.write("Student Learner\tsaved worker")
+    appliedJobs = open("appliedJobs.txt", "w")
+    appliedJobs.write("Student Learner\tsaved worker\tstart date\tendate\tdes")
     appliedJobs.close()
 
     testBaseEpic6.savedJobListGenerate("Student Learner")
@@ -381,7 +381,45 @@ def test_savedjoblist():
 
     assert output == ["List of saved jobs:", "saved worker", "------------------------------------"]
 
-    
+def test_applypostedjobs():
+    postedJobs = open("jobs.txt", "w")
+    postedJobs.write("Student Learner\tworker\tD\tE\tL\tS")
+    postedJobs.close()
+
+    set_keyboard_input(["worker"])
+    testBaseEpic6.checkApplyJobs("Student Learner")
+
+    output = get_display_output()
+
+    assert output == ["Enter the name of the job you want to apply to: ",
+                        "Error, You listed this job as an employer: Student Learner" ]
+
+def test_applyappliedjobs():
+    appliedJobs = open("appliedJobs.txt", "w")
+    appliedJobs.write("Student Learner\tworker\tstart date\tendate\tdes")
+    appliedJobs.close()
+
+    set_keyboard_input(["worker"])
+    testBaseEpic6.checkApplyJobs("Student Learner")
+
+    output = get_display_output()
+
+    assert output == ["Enter the name of the job you want to apply to: ",
+                        "Error, You have already applied to this job: worker" ]
+
+def test_deletejobs():
+    Jobs = open("jobs.txt", "w")
+    Jobs.write("Student Learner\tworker\tD\tE\tL\tS")
+    Jobs.close()
+
+    set_keyboard_input(["worker"])
+    views.deleteJOB()
+
+    jobs = open("jobs.txt", "r").readlines()
+
+    assert len(jobs) == 0
+
+
 def mock_input(s):
     print_values.append(s)
     return input_values.pop(0)
