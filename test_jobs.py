@@ -371,8 +371,8 @@ def test_notappliedjoblist():
 
 def test_savedjoblist():
     print_values.clear()
-    appliedJobs = open("appliedJobs.txt", "w")
-    appliedJobs.write("Student Learner\tsaved worker\tstart date\tendate\tdes")
+    appliedJobs = open("savedJobs.txt", "w")
+    appliedJobs.write("Student Learner\tsaved worker")
     appliedJobs.close()
 
     testBaseEpic6.savedJobListGenerate("Student Learner")
