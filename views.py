@@ -440,6 +440,11 @@ def jobSearchPage():
         else:
             print("Please enter an available option!!\n")
 
+def job_got_deleted_notification(userName,jobName):
+    appliedJobsGotDeletedFile = open("appliedJobsDeleted.txt",'a')
+    appliedJobsGotDeletedFile.write(userName + '\t' + jobName +'\n')
+    appliedJobsGotDeletedFile.close()
+
 def deleteJOB():
     print("\n----------JOB DELETION--------")
     sel = input("Enter the name of the job you want to delete: ")
@@ -463,12 +468,13 @@ def deleteJOB():
                     l = l.rstrip()
                     n,t, start, end, des = l.split('\t')
                     # if the title is the same put in the appliedJobsDeleted
-                    if t == lines[i]:
+                    if t == sel:
+                        print("deleted")
                         job_got_deleted_notification(n,t)
                     
             #close file
             f.close()
-    print(lines)
+
     new_file = open("jobs.txt", "w+")
     for line in lines:
         new_file.write(line)
@@ -476,7 +482,6 @@ def deleteJOB():
     new_file.close()
     
     print("-----JOB Deleted------\n")
-        
 
 
 def displayJob(title):
@@ -515,10 +520,7 @@ def saveJobApp(name, title, g, s, d):
     file5.close()
     
 
-def job_got_deleted_notification(userName,jobName):
-    appliedJobsGotDeletedFile = open("appliedJobsDeleted.py",'a')
-    appliedJobsGotDeletedFile.write(userName + '\t' + jobName +'\n')
-    appliedJobsGotDeletedFile.close()
+
 
 
 #check if applied jobs got deleted
