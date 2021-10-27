@@ -94,6 +94,7 @@ def register():
     if u == "0":
         return
 
+    
     file.write(u + "\n")
     print(
         "Note password requirements: minimum of 8 characters, maximum of 12 characters, at least one capital letter, one digit, one non-alpha character")
@@ -115,6 +116,12 @@ def register():
     Fname = input("What is your first name?: ")
     Lname = input("What is your last name?: ")
 
+    print("-------------------------------------------------")
+    plus = input("- Do you want to register as a PLUS member? (y/n): ")
+    if plus == "y":
+        Fname = Fname + "++"
+    print("-------------------------------------------------")
+    
     file3.write(Fname + " " + Lname + "\n")
 
     file.close()
@@ -122,6 +129,7 @@ def register():
     file3.close()
 
     nameofuser = Fname + " " + Lname
+    
     print("\nHello, " + Fname)
     print("Account Created!")
     print("Entering main page....")

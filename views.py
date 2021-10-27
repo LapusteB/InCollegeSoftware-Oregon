@@ -47,6 +47,10 @@ def mainPage(nameofuser):
         print("| '7' to show your friendList       |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
+        if "++" not in name:
+            print("\n-------------------------------------")
+            print("| '++' to become a PLUS member       |")
+            print("-------------------------------------")
         print("")
         kbInput = input("Enter page you want to go to: ")
 
@@ -64,6 +68,8 @@ def mainPage(nameofuser):
             friend.friendMenu(name)
         elif (kbInput == '7'):
             friendList.friendList1(name)
+        elif (kbInput == "++"):
+            registerPlusUser(name)
         elif (kbInput == '0'):
             return
         else:
@@ -451,8 +457,6 @@ def deleteJOB():
     
     a_file = open("jobs.txt", "r")
 
-    localApliedJobsObjList = []
-
     lines = a_file.readlines()
     a_file.close()
 
@@ -657,6 +661,29 @@ def savedJobListGenerate():
     
     print("------------------------------------")
     
+def registerPlusUser(name):
+    
+    NewLines =[]
+    opn = open("accounts.txt", "r")
+    lines = opn.readlines()
+    opn.close()
+                        
+    newName = name + "++"
+    for line in lines:
+        newline = line.replace(name, newName)
+        NewLines.append(newline)
+            
+    clos = open("accounts.txt", "w+")
+    for line in NewLines:
+        clos.write(line)
+    
+    clos.close()
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("+ Congratulations!! you have registerd as a plus user +")
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    mainPage(name)
+
+
 
 def pageUnderConstruction():
     print("")
