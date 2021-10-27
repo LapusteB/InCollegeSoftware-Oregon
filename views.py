@@ -677,6 +677,7 @@ def registerPlusUser(name):
     for line in NewLines:
         clos.write(line)
     
+    name = name + "++"
     clos.close()
     print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     print("+ Congratulations!! you have registerd as a plus user +")
