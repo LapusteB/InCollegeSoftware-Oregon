@@ -3,6 +3,7 @@ import usefulLinks
 import profile
 import friend
 import friendList
+import mailbox
 
 savedJobsMap = {}
 savedJobsList = []
@@ -45,11 +46,11 @@ def mainPage(nameofuser):
         print("| '5' to go to your profile         |")
         print("| '6' to show your network          |")
         print("| '7' to show your friendList       |")
+        print("| '8' to enter you mailbox          |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
         if "++" not in name:
-            print("\n-------------------------------------")
-            print("| '++' to become a PLUS member       |")
+            print("| '++' to become a PLUS member      |")
             print("-------------------------------------")
         print("")
         kbInput = input("Enter page you want to go to: ")
@@ -68,6 +69,8 @@ def mainPage(nameofuser):
             friend.friendMenu(name)
         elif (kbInput == '7'):
             friendList.friendList1(name)
+        elif(kbInput == "8"):
+            mailbox.mailboxMenu(name)
         elif (kbInput == "++"):
             registerPlusUser(name)
         elif (kbInput == '0'):
