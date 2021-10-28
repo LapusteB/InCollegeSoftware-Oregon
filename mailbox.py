@@ -22,14 +22,14 @@ def mailboxMenu(username):
                 
         print("")
         print("------------------------------------------")
-        print("| '1' to open mailbox                    |")
+        print("| '1' to open inbox                      |")
         print("| '2' to message a friend                |")
         print("| '0' to return to main page             |")
         print("------------------------------------------")
         cmd = input("What would you like to do: ")
 
         if (cmd == '1'):
-            print("...")
+            inbox(username)
         elif (cmd == '2'):
             messageFriend(username)
         elif (cmd == '0'):
@@ -37,6 +37,20 @@ def mailboxMenu(username):
         else:
             print("Invalid input, please try again")
             print("")
+
+def inbox(username):
+    inbox = []
+    file = open("mailboxDataBase.txt", "r")
+
+    lines = file.readlines()
+    file.close()
+    r = "TO:: " + username
+    for line in lines:
+        if r in line:
+            inbox.append(line)
+    
+    print(inbox)
+
 
 def messageFriend(username):
     
@@ -93,7 +107,6 @@ def messageFriend(username):
                 
         profileExists = False
 
-
     if(count_friend == -1):
         print("| No friend to show                 |")
         print("-------------------------------------")
@@ -110,21 +123,21 @@ def messageFriend(username):
         cmd = input("| Enter the name of your friend you want to message: ")
         
        
-        
+        if cmd ==  fu or u:
+            with open('accounts.txt','r') as f:
+                if cmd in f.read():
+                    sendMessage(cmd)
+                    return
 
-        if (cmd == '1'):
-            print("...")
-        elif (cmd == '2'):
-            messageFriend(username)
-        elif (cmd == '0'):
+        if (cmd == '0'):
             return
         else:
             print("Invalid input, please try again")
             print("")
     
-    '''
-    from friendList import friendList1
-    friendList1(username)
-    '''
     
-    
+def sendMessage(friend):
+    m = input("Please enter the message you want to send to "+ friend +":")
+
+    file = open("mailboxDataBase.txt", "a")
+    file.write("TO:: " +friend + ": "+ m + " From::" + user +"\n")
