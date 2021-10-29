@@ -260,3 +260,27 @@ def sendMessage(friend, user):
 
     file = open("mailboxDataBase.txt", "a")
     file.write("TO:: " +friend + ": "+ m + " From::" + user +"\n")
+
+
+def registerPlusUser(name):
+    
+    NewLines =[]
+    opn = open("accounts.txt", "r")
+    lines = opn.readlines()
+    opn.close()
+                        
+    newName = name + "++"
+    for line in lines:
+        newline = line.replace(name, newName)
+        NewLines.append(newline)
+            
+    clos = open("accounts.txt", "w+")
+    for line in NewLines:
+        clos.write(line)
+    
+    name = name + "++"
+    clos.close()
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("+ Congratulations!! you have registerd as a plus user +")
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    

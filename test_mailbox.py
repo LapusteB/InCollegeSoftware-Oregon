@@ -45,7 +45,21 @@ def testStandardMessageFriend():
                 found = True
 
     assert found == True
-    
+
+def testChoicePlus():
+    testBaseEpic7.registerPlusUser("Student Learner")
+
+    accountFile = open("accounts.txt", "r")
+    accountline = accountFile.readlines()
+    accountFile.close()
+    found = False
+    for line in accountline:
+        if line != '\n':
+            if str("Student Learner++") in line:
+                found = True
+
+    assert found == True
+
 def mock_input(s):
     print_values.append(s)
     return input_values.pop(0)
