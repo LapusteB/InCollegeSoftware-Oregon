@@ -60,6 +60,19 @@ def testChoicePlus():
 
     assert found == True
 
+def testdeletemessage():
+    set_keyboard_input(["TO:: Student2 Learner2: This is testing From::Student Learner\n"])
+    mailbox.deleteMessage("Student Learner")
+
+    file = open("mailboxDataBase.txt", "r")
+    lines = file.readlines()
+    found = False
+    for line in lines:
+        if line != '\n':
+            if str("TO:: Student2 Learner2: This is testing From::Student Learner\n") in line:
+                found = True
+    assert found == False
+
 def testinbox():
     set_keyboard_input(["This is testing"])
 
