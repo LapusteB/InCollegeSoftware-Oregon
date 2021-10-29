@@ -384,3 +384,92 @@ def mainPage():
 
 
 #postNewJob()
+
+'''For epic7'''
+
+def sendMessage(friend):
+    m = input("Please enter the message you want to send to "+ friend +":")
+
+    file = open("mailboxDataBase.txt", "a")
+    file.write("TO:: " +friend + ": "+ m + " From::" + user +"\n")
+    file.close()
+
+#check if member is plus or standard
+def isPlus(username):
+    if "++" not in username:
+        return False
+    return True
+
+#plus members able to message all users
+def messageUser(username):
+    count = 0
+    print("------------------")
+    print("|    User List   |")
+
+    nameFile = open("accounts.txt", "r")
+
+    users = nameFile.readlines()
+
+    for line in users:
+        if username not in line:
+            print(line)
+            count = count + 1
+
+    if count == 0:
+        print("  No users found")
+    print("------------------")
+
+    nameFile.close()
+
+    if count != 0:
+        cmd = ""
+        while cmd != "0":
+
+            print("")
+            print("| '0' to return to main page             |")
+            cmd = input("| Enter the name of the user you want to message: ")
+
+            with open('accounts.txt', 'r') as f:
+                if cmd in f.read():
+                    sendMessage(cmd)
+                    return
+
+            if cmd == '0':
+                return
+            else:
+                print("Invalid input, please try again")
+                print("")
+
+
+def mailboxMenu(username):
+    global user
+    user = username
+    print("----------Welcome to mailbox-------------")
+
+    cmd = ""
+    #while(cmd != "0"):
+                
+    print("")
+    print("------------------------------------------")
+    print("| '1' to open inbox                      |")
+    print("| '2' to message a friend                |")
+    print("| '0' to return to main page             |")
+    print("------------------------------------------")
+    cmd = input("What would you like to do: ")
+
+    if (cmd == '1'):
+        #inbox(username)
+        print("")
+    elif (cmd == '2'):
+        if (isPlus(username)):
+            messageUser(username)
+            #break
+        else:
+            #messageFriend((username))
+            print("")
+    elif (cmd == '0'):
+        return
+    else:
+        print("Invalid input, please try again")
+        print("")
+
