@@ -60,6 +60,18 @@ def testChoicePlus():
 
     assert found == True
 
+def testinbox():
+    set_keyboard_input(["This is testing"])
+
+    testBaseEpic7.sendMessage("Student Learner", "Student2 Learner2")
+
+    testBaseEpic7.inbox("Student Learner")
+
+    output = get_display_output()
+
+    assert output == ["Please enter the message you want to send to Student Learner:"
+        ,['TO:: Student Learner: This is testing From::Student2 Learner2\n']]
+
 def mock_input(s):
     print_values.append(s)
     return input_values.pop(0)

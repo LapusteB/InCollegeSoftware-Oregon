@@ -55,18 +55,6 @@ def inbox(username):
 
     print(inbox)
 
-    inp = ''
-    while inp != '0' or inp != 'Reply' or inp != 'reply' or inp != 'Manage' or inp != 'manage':
-        inp = input("Would you like to manage your inbox or reply to a message? (Type 'reply', 'manage', or 0 to exit)")
-        if inp == 'Reply' or inp == 'reply':
-            replyMessage(username)
-        elif  inp == 'Manage' or inp == 'manage':
-            deleteMessage(username)
-        elif inp == '0':
-            return
-        else:
-            print("Invalid input, please try again.")
-
 
 #function to delete a message
 def deleteMessage(username):
