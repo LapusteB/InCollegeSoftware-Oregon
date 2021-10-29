@@ -2,6 +2,7 @@ from testHelper import mock_input_output_end,mock_input_output_start,get_output,
 import testBase
 
 #accounts.txt
+
 def test_plus_user_send_messsage():
     
     mock_input_output_start()
@@ -43,6 +44,41 @@ def test_plus_user_send_messsage():
     file2.close()
 
     mock_input_output_end()
+
+
+def test_respond_message():
+
+    open('accounts.txt', 'w').close()
+    file = open("accounts.txt","a")
+    file.write("john++ le\n")
+    file.close()
+   
+    message = "The message"
+    user = "student learner"
+    friend = "john++ le"
+    messageDat = "TO:: " + user + ": "+ message + " From::" + friend +"\n"
+    messageDat_user_to_friend = "TO:: " + user + ": "+ message + " From::" + friend +"\n"
+
+    mock_input_output_start()
+    set_input(["reply",'y',friend,message])
+
+    #write sender message
+    open('mailboxDataBase.txt','w').close
+    file = open("mailboxDataBase.txt",'a')
+    file.write(messageDat)
+    file.close()
+
+    #get reply message
+    file2 = open("mailboxDataBase.txt")
+
+    #function calls: 
+    testBase.inbox(user)
+
+    assert messageDat_user_to_friend in file2.read()
+
+    file2.close()
+    mock_input_output_end()
+
 
                 
     

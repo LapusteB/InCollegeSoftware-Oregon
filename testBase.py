@@ -387,7 +387,8 @@ def mainPage():
 
 '''For epic7'''
 
-def sendMessage(friend):
+
+def sendMessage(friend,user):
     m = input("Please enter the message you want to send to "+ friend +":")
 
     file = open("mailboxDataBase.txt", "a")
@@ -431,7 +432,7 @@ def messageUser(username):
 
             with open('accounts.txt', 'r') as f:
                 if cmd in f.read():
-                    sendMessage(cmd)
+                    sendMessage(cmd,username)
                     return
 
             if cmd == '0':
@@ -472,4 +473,67 @@ def mailboxMenu(username):
     else:
         print("Invalid input, please try again")
         print("")
+
+def inbox(username):
+    count = 0
+    inbox = []
+    file = open("mailboxDataBase.txt", "r")
+
+    lines = file.readlines()
+    file.close()
+    r = "TO:: " + username
+    for line in lines:
+        if r in line:
+            inbox.append(line)
+
+    print(inbox)
+
+    inp = ''
+    while inp != '0' or inp != 'Reply' or inp != 'reply' or inp != 'Manage' or inp != 'manage':
+        inp = input("Would you like to manage your inbox or reply to a message? (Type 'reply', 'manage', or 0 to exit)")
+        if inp == 'Reply' or inp == 'reply':
+            replyMessage(username)
+            return
+        elif  inp == 'Manage' or inp == 'manage':
+            print("")
+            #deleteMessage(username)
+        elif inp == '0':
+            return
+        else:
+            print("Invalid input, please try again.")
+
+#function to reply to an inbox message
+def replyMessage(username):
+    reply = 'y'
+    while reply != 'Y' or reply != 'y' or reply != 'N' or reply != 'n':
+        reply = input("\nWould you like to reply to any of these messages? (Y/N): ")
+        if reply == 'Y' or reply == 'y':
+            sender = input("Please enter the full name of the user you'd like to reply to: ")
+            if userinInbox(sender, username):
+                sendMessage(sender,username)
+            else:
+                print("No conversation found between you and " + sender + ".")
+            return
+        elif reply == 'N' or reply == 'n':
+            return
+        else:
+            print("Invalid input, please enter Y to reply or N to go back to your mailbox.")
+
+#check if user sent message
+def userinInbox(sender, username):
+    file = open("mailboxDataBase.txt", "r")
+    lines = file.readlines()
+    file.close()
+
+    t = "TO:: " + username
+    r = "From::" + sender
+
+    for line in lines:
+        if line.find(r) != -1 and line.find(t) != -1:
+            return True
+
+    return False
+
+
+
 
