@@ -6,7 +6,6 @@ from validatePass import validatePass
 import login
 import importantLinks
 
-
 class User:
 
     def __init__(self, name, username, password):
