@@ -79,6 +79,24 @@ def test_respond_message():
     file2.close()
     mock_input_output_end()
 
+def test_message_notification():
+    mock_input_output_start()
+    set_input(["john++ le","The message"])
+
+    #prep the accounts.txt file, (add friend)
+    open('accounts.txt', 'w').close()
+    file = open("accounts.txt","a")
+    file.write("john++ le\n")
+    file.close()
+
+    user = "van++ le"
+    friend = "john++ le"
+    testBase.sendMessage2(friend,user)
+    
+    assert testBase.messageNotification(friend) == True
+
+    mock_input_output_end()
+
 
                 
     
