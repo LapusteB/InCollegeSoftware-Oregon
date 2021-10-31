@@ -53,6 +53,9 @@ def mainPage(nameofuser):
             print("| '++' to become a PLUS member      |")
             print("-------------------------------------")
         print("")
+        if messageNotification(name):
+            print("You have new messages in your inbox.\n")
+
         kbInput = input("Enter page you want to go to: ")
 
         if (kbInput == '1'):
@@ -77,6 +80,22 @@ def mainPage(nameofuser):
             return
         else:
             print("Please enter an available option!!\n")
+
+
+#checks for new messages
+def messageNotification(username):
+    nameFile = open("mailboxDataBase.txt", "r")
+    new_message = nameFile.readlines()
+    nameFile.close()
+
+    t = "TO:: " + username
+    f = "*"
+
+    for line in new_message:
+        if t in line and f in line:
+            return True
+
+    return False
 
 
 def postNewJob():

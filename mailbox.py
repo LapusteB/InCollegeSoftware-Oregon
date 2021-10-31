@@ -42,13 +42,23 @@ def mailboxMenu(username):
             print("")
 
 def inbox(username):
-    count = 0
-    inbox = []
-    file = open("mailboxDataBase.txt", "r")
+    file2 = open("mailboxDataBase.txt", "r")
+    lines1 = file2.readlines()
+    file2.close()
 
+    file1 = open("mailboxDataBase.txt", "w")
+    r = "TO:: " + username
+    for line in lines1:
+        if r in line:
+            file1.write(line.replace("*", ""))
+        else:
+            file1.write(line)
+    file1.close()
+    inbox = []
+
+    file = open("mailboxDataBase.txt", "r")
     lines = file.readlines()
     file.close()
-    r = "TO:: " + username
     for line in lines:
         if r in line:
             inbox.append(line)
@@ -259,4 +269,4 @@ def sendMessage(friend):
     m = input("Please enter the message you want to send to "+ friend +":")
 
     file = open("mailboxDataBase.txt", "a")
-    file.write("TO:: " +friend + ": "+ m + " From::" + user +"\n")
+    file.write("TO:: " + friend + ": "+ m + " From::" + user +"*\n")
