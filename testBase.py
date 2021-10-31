@@ -534,6 +534,27 @@ def userinInbox(sender, username):
 
     return False
 
+def messageNotification(username):
+    nameFile = open("mailboxDataBase.txt", "r")
+    new_message = nameFile.readlines()
+    nameFile.close()
+
+    t = "TO:: " + username
+    f = "*"
+
+    for line in new_message:
+        if t in line and f in line:
+            return True
+
+    return False
+
+def sendMessage2(friend,user):
+    m = input("Please enter the message you want to send to "+ friend +":")
+
+    file = open("mailboxDataBase.txt", "a")
+    file.write("TO:: " + friend + ": "+ m + " From::" + user +"*\n")
+
+
 
 
 
