@@ -56,7 +56,7 @@ def mainPage(nameofuser):
         print("")
         notifications.createProfileNotification(nameofuser)
         if messageNotification(name):
-            print("You have new messages in your inbox.\n")
+            print("You have messages waiting for you.\n")
 
         kbInput = input("Enter page you want to go to: ")
 
