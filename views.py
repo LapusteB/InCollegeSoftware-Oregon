@@ -4,6 +4,7 @@ import profile
 import friend
 import friendList
 import mailbox
+import notifications
 
 savedJobsMap = {}
 savedJobsList = []
@@ -53,6 +54,7 @@ def mainPage(nameofuser):
             print("| '++' to become a PLUS member      |")
             print("-------------------------------------")
         print("")
+        notifications.createProfileNotification(nameofuser)
         if messageNotification(name):
             print("You have new messages in your inbox.\n")
 
