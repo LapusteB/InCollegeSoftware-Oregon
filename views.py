@@ -322,6 +322,7 @@ def jobSearchPage():
     printJob()
     b = "x"
 
+    notifications.numberOfAppliedJobsNotification(name)
     #saved jobs and unmark jobs options
     while( b != "-1"):
         b = input("Enter 'a' to appy for jobs, Enter 's' to save jobs, 'u' to unmark a job or " + 
