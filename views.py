@@ -1,4 +1,5 @@
 from os import name
+from datetime import date
 import usefulLinks
 import profile
 import friend
@@ -57,6 +58,10 @@ def mainPage(nameofuser):
         notifications.createProfileNotification(nameofuser)
         if messageNotification(name):
             print("You have messages waiting for you.\n")
+
+        if notifications.checkLastJobAppliedNotification(name):
+            print("\nRemember – you're going to want to have a job when you graduate."
+                  " Make sure that you start to apply for jobs today!\n")
 
         kbInput = input("Enter page you want to go to: ")
 
@@ -208,7 +213,7 @@ def update_appliedJobs():
     for line in appliedJobsFile:
         if line != '\n':
             line = line.rstrip()
-            n, t, start, end, des = line.split('\t')
+            n, t, start, end, des, dateApplied = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
@@ -236,7 +241,7 @@ def update_jobs_appliedJobs_and_savedJobs():
     for line in appliedJobsFile:
         if line != '\n':
             line = line.rstrip()
-            n, t, start, end, des = line.split('\t')
+            n, t, start, end, des, dateApplied = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
@@ -535,20 +540,20 @@ def displayJob(title):
 def jobApplication(title):
 
     print("\n----------JOB APPLICATION----------")
-  
+
+    today = date.today()
+    dateApplied = today.strftime("%m/%d/%Y")
     g = input("Enter your graduation date Ex:(mm/dd/yyyy): ")
     s = input("Enter the day you can start Ex:(mm/dd/yyyy): ")
     d = input("Describe why you feel fit for the job: ")
     print("----------APPLICATION SUBMITTED!!!----------\n")
-    saveJobApp(name, title, g, s, d)
+    saveJobApp(name, title, g, s, d, dateApplied)
     
 
-def saveJobApp(name, title, g, s, d):
+def saveJobApp(name, title, g, s, d, dateApplied):
     file5 = open("appliedJobs.txt", "a")
-    file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\n" )
+    file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\t" + str(dateApplied)+"\n" )
     file5.close()
-    
-
 
 
 
