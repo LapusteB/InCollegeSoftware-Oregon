@@ -19,11 +19,13 @@ def numberOfAppliedJobsNotification(username):
     for job in appliedJobs:
         if job != '\n':
             name, a, b, c, d, dateApplied = job.split('\t')
+            name, a, b, c, d, e = job.split('\t')
             if name == username:
                 numberOfJobs += 1
     print("")
     print(f"NOTIFICATION: You have currently applied for {numberOfJobs} jobs")
     print("")
+
 
 #checks date applied for job and compares to current date
 def checkLastJobAppliedNotification(username):
