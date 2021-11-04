@@ -500,7 +500,7 @@ def deleteJOB():
             for l in f:
                 if l != '\n':
                     l = l.rstrip()
-                    n,t, start, end, des = l.split('\t')
+                    n,t, start, end, des, e = l.split('\t')
                     # if the title is the same put in the appliedJobsDeleted
                     if t == sel:
                         print("deleted")
@@ -609,7 +609,7 @@ def appliedJobListGenerate():
     for line in file:
         if line != '\n':
             line = line.rstrip()
-            n, t, start, end, des = line.split('\t')
+            n, t, start, end, des, sth = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
@@ -636,7 +636,7 @@ def notAppliedJobsListGenerator():
     for line in file:
         if line != '\n':
             line = line.rstrip()
-            n, t, start, end, des = line.split('\t')
+            n, t, start, end, des, sth = line.split('\t')
             if(n == name):
                 appliedJobsList.append(t)
 
