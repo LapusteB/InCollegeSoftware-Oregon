@@ -32,6 +32,21 @@ def test_numberOfAppliedJobsNotification():
                     "NOTIFICATION: You have currently applied for 1 jobs",""]
     mock_input_output_end()
 
+def test_checkLastJobAppliedNotification():
+    open('appliedJobs.txt', 'w').close()
+    name = "john le"
+    title = "job"
+    g = "2020"
+    s = "2021"
+    d = "2022"
+    dateApplied = "01/01/2024"
+    testDate= "01/20/2024"
+
+    testBase.saveJobApp(name, title, g, s, d, dateApplied)
+    #false means more than 7 days? 
+    assert testBase.checkLastJobAppliedNotification(name,testDate) == True and testBase.checkLastJobAppliedNotification(name,"01/02/2024") == False
+
+
 
 
 
