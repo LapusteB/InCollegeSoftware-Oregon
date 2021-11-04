@@ -63,6 +63,10 @@ def mainPage(nameofuser):
             print("\nRemember – you're going to want to have a job when you graduate."
                   " Make sure that you start to apply for jobs today!\n")
 
+        if notifications.newJobPostedNotification(name):
+            print("A new job <" +
+                  notifications.getTitleForJobNotification(name) + "> has been posted\n")
+
         kbInput = input("Enter page you want to go to: ")
 
         if (kbInput == '1'):
@@ -139,9 +143,21 @@ def createNewJob():
     salary = input("Enter the salary for your job: ")
 
     saveJob(name, title, description, employer, location, salary)
-
+    newJobPosted(name, title)
     print("\nyour job has been saved")
     mainPage(name)
+
+
+def newJobPosted(username, title):
+    file1 = open("accounts.txt", "r")
+    file2 = open("newJobPosted.txt", "w")
+
+    for line in file1:
+        if username not in line:
+            line = line.strip('\n')
+            file2.write(line + "\t" + title + "\n")
+    file1.close()
+    file2.close()
 
 
 def saveJob(n, t, d, e, l, s):
@@ -324,6 +340,7 @@ def jobSearchPage():
         print("List of all jobs")
     else: print("No job has been posted")
 
+    notifications.removeJobPostedNotification(name)
     printJob()
     b = "x"
 

@@ -18,7 +18,7 @@ def numberOfAppliedJobsNotification(username):
     appliedJobs = open("appliedJobs.txt", "r")
     for job in appliedJobs:
         if job != '\n':
-            name, a, b, c, d = job.split('\t')
+            name, a, b, c, d, dateApplied = job.split('\t')
             if name == username:
                 numberOfJobs += 1
     print("")
@@ -41,3 +41,35 @@ def checkLastJobAppliedNotification(username):
 
     return False
 
+#notifies if new job has been posted
+def newJobPostedNotification(username):
+    file = open("newJobPosted.txt", "r")
+    t = username
+    for line in file:
+        if line != '\n':
+            if t in line:
+                return True
+
+    return False
+
+
+#removes job posted notification when user checks jobs
+def removeJobPostedNotification(username):
+    file = open("newJobPosted.txt", "r")
+    removal = file.readlines()
+    file.close()
+    copy = open("newJobPosted.txt", "w")
+
+    for line in removal:
+        if username not in line:
+            copy.write(line)
+
+
+def getTitleForJobNotification(username):
+    file = open("newJobPosted.txt", "r")
+    for line in file:
+        if line != '\n':
+            name, title = line.split('\t')
+            if name == username:
+                title = title.strip('\n')
+                return title
