@@ -554,7 +554,8 @@ def sendMessage2(friend,user):
     file = open("mailboxDataBase.txt", "a")
     file.write("TO:: " + friend + ": "+ m + " From::" + user +"*\n")
 
-
-
-
-
+#epic 8
+def saveJobApp(name, title, g, s, d, dateApplied):
+    file5 = open("appliedJobs.txt", "a")
+    file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\t" + str(dateApplied)+"\n" )
+    file5.close()

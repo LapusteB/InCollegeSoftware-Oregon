@@ -18,7 +18,7 @@ def numberOfAppliedJobsNotification(username):
     appliedJobs = open("appliedJobs.txt", "r")
     for job in appliedJobs:
         if job != '\n':
-            name, a, b, c, d = job.split('\t')
+            name, a, b, c, d, e = job.split('\t')
             if name == username:
                 numberOfJobs += 1
     print("")
