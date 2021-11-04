@@ -76,3 +76,54 @@ def getTitleForJobNotification(username):
             if name == username:
                 title = title.strip('\n')
                 return title
+
+def addNotificationsForNewUser(first, last):
+    file = open("accounts.txt", "r")
+    file1 = open("newStudentNotification.txt", "w")
+    fullName = first + " " + last
+    for line in file:
+        if line != '\n' and fullName not in line:
+            line = line.strip('\n')
+            file1.write(line + '\t' + first + '\t' + last + '\n')
+
+
+def checkNotificationsForNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            if name == username:
+                return True
+    return False
+
+def returnFirstNameOfNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            notifFirstName = notifFirstName.strip('\n')
+            if name == username:
+                return notifFirstName
+
+def returnLastNameOfNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            notifLastName = notifLastName.strip('\n')
+            if name == username:
+                return notifLastName
+
+def removeNewUserNotification(username):
+    file = open("newStudentNotification.txt", "r")
+    fileRead = file.readlines()
+    file.close
+
+    file1 = open("newStudentNotification.txt", "w")
+
+    for line in fileRead:
+        if username not in line:
+            file1.write(line)

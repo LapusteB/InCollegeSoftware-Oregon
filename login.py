@@ -1,5 +1,6 @@
 from validatePass import validatePass
 from views import mainPage
+import notifications
 import random
 
 
@@ -133,6 +134,7 @@ def register():
     print("\nHello, " + Fname)
     print("Account Created!")
     print("Entering main page....")
+    notifications.addNotificationsForNewUser(Fname, Lname)
     mainPage(nameofuser)
 
 

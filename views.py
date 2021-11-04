@@ -64,8 +64,14 @@ def mainPage(nameofuser):
                   " Make sure that you start to apply for jobs today!\n")
 
         if notifications.newJobPostedNotification(name):
-            print("A new job <" +
+            print("\nA new job <" +
                   notifications.getTitleForJobNotification(name) + "> has been posted\n")
+
+        if notifications.checkNotificationsForNewUser(name):
+            print("<" + notifications.returnFirstNameOfNewUser(name) +
+                  "> <" + notifications.returnLastNameOfNewUser(name) +
+                  "> x has joined InCollege\n")
+            notifications.removeNewUserNotification(name)
 
         kbInput = input("Enter page you want to go to: ")
 
