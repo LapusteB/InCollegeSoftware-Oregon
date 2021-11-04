@@ -37,8 +37,9 @@ def checkLastJobAppliedNotification(username):
     for line in appliedJobs:
         if line != '\n':
             name, a, b, c, d, dateApplied = line.split('\t')
-            lastApplied = datetime.strptime(dateApplied, "%d/%m/%Y")
-            if name == username and (lastApplied - todaysDate).days < 7:
+            dateApplied = dateApplied.strip('\n')
+            lastApplied = datetime.strptime(dateApplied, "%m/%d/%Y")
+            if name == username and (todaysDate - lastApplied).days > 6:
                 return True
 
     return False
