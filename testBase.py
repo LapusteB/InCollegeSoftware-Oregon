@@ -560,23 +560,42 @@ def saveJobApp(name, title, g, s, d, dateApplied):
     file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\t" + str(dateApplied)+"\n" )
     file5.close()
 
+# def checkLastJobAppliedNotification(username,_aWeekFromDateApplied):
+#     #today to 7 days from now.
+#     #today = date.today()
+#     #temp = today.strftime("%m/%d/%Y")
+#     #todaysDate = datetime.strptime(temp, "%m/%d/%Y")
+
+#     aWeekFromDateApplied = datetime.strptime(str(_aWeekFromDateApplied), "%m/%d/%Y")
+
+#     appliedJobs = open("appliedJobs.txt", "r")
+#     for line in appliedJobs:
+#         if line != '\n':
+#             line = line.rstrip()
+#             name, a, b, c, d, dateApplied = line.split('\t')
+#             lastApplied = datetime.strptime(dateApplied, "%m/%d/%Y")
+#             #if name == username and (lastApplied - aWeekFromDateApplied).days > 7:
+#             if name == username and (aWeekFromDateApplied - lastApplied).days >= 7:
+#                 print("applied - today" + str((lastApplied - aWeekFromDateApplied).days))
+#                 return True
+
+#     return False
+
+#checks date applied for job and compares to current date
 def checkLastJobAppliedNotification(username,_aWeekFromDateApplied):
-    #today to 7 days from now.
-    #today = date.today()
-    #temp = today.strftime("%m/%d/%Y")
-    #todaysDate = datetime.strptime(temp, "%m/%d/%Y")
+    # today = date.today()
+    # temp = today.strftime("%m/%d/%Y")
+    # todaysDate = datetime.strptime(temp, "%m/%d/%Y")
 
     aWeekFromDateApplied = datetime.strptime(str(_aWeekFromDateApplied), "%m/%d/%Y")
 
     appliedJobs = open("appliedJobs.txt", "r")
     for line in appliedJobs:
         if line != '\n':
-            line = line.rstrip()
             name, a, b, c, d, dateApplied = line.split('\t')
+            dateApplied = dateApplied.strip('\n')
             lastApplied = datetime.strptime(dateApplied, "%m/%d/%Y")
-            #if name == username and (lastApplied - aWeekFromDateApplied).days > 7:
-            if name == username and (aWeekFromDateApplied - lastApplied).days >= 7:
-                print("applied - today" + str((lastApplied - aWeekFromDateApplied).days))
+            if name == username and (aWeekFromDateApplied - lastApplied).days > 6:
                 return True
 
     return False
