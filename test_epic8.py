@@ -89,13 +89,35 @@ def mainPage(nameofuser):
             print("\nA new job <" +
                   notifications.getTitleForJobNotification(name) + "> has been posted\n")
 
-        if notifications.checkNotificationsForNewUser(name):
-            print("<" + notifications.returnFirstNameOfNewUser(name) +
-                  "> <" + notifications.returnLastNameOfNewUser(name) +
+        if checkNotificationsForNewUser(name):
+            print("<" + returnFirstNameOfNewUser(name) +
+                  "> <" + returnLastNameOfNewUser(name) +
                   "> x has joined InCollege\n")
-            notifications.removeNewUserNotification(name)
+            removeNewUserNotification(name)
 
         kbInput = input("Enter page you want to go to: ")
+
+def removeNewUserNotification(username):
+    file = open("newStudentNotification.txt", "r")
+    fileRead = file.readlines()
+    file.close
+
+    file1 = open("newStudentNotification.txt", "w")
+
+    for line in fileRead:
+        if username not in line:
+            file1.write(line)
+
+
+def checkNotificationsForNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            if name == username:
+                return True
+    return False
 
 #notifies if new job has been posted
 def newJobPostedNotification(username):
@@ -116,6 +138,95 @@ def getTitleForJobNotification(username):
             if name == username:
                 title = title.strip('\n')
                 return title
+
+def returnFirstNameOfNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            notifFirstName = notifFirstName.strip('\n')
+            if name == username:
+                return notifFirstName
+
+def returnFirstNameOfNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            notifFirstName = notifFirstName.strip('\n')
+            if name == username:
+                return notifFirstName
+
+def returnLastNameOfNewUser(username):
+    file = open("newStudentNotification.txt", "r")
+
+    for line in file:
+        if line != '\n':
+            name, notifFirstName, notifLastName = line.split('\t')
+            notifLastName = notifLastName.strip('\n')
+            if name == username:
+                return notifLastName
+
+def test_NotificationForNewUser():
+    nameofuser = "User2"
+    mock_input_output_start()
+    set_input(["5", "0", "8"])
+    mainPage(nameofuser)
+    output = get_output()
+
+    assert output == [           '',
+            '*************',
+           '* InCollege *',
+            '*************',
+            '',
+            'Main page',
+            '------------------------------------',
+            "| '1' to find someone you know      |",
+            "| '2' for learn new skill           |",
+            "| '3' for job search/ internship    |",
+            "| '4' for useful links              |",
+            "| '5' to go to your profile         |",
+            "| '6' to show your network          |",
+            "| '7' to show your friendList       |",
+            "| '8' to enter you mailbox          |",
+            "| '0' to return to login            |",
+           '-------------------------------------',
+              "| '++' to become a PLUS member      |",
+           '-------------------------------------',
+           '',
+            "NOTIFICATION: Don't forget to create a profile!",
+       
+            'Enter page you want to go to: ',
+            '',
+            '*************',
+            '* InCollege *',
+            '*************',
+            '',
+            'Main page',
+            '------------------------------------',
+            "| '1' to find someone you know      |",
+            "| '2' for learn new skill           |",
+            "| '3' for job search/ internship    |",
+            "| '4' for useful links              |",
+            "| '5' to go to your profile         |",
+            "| '6' to show your network          |",
+            "| '7' to show your friendList       |",
+           "| '8' to enter you mailbox          |",
+            "| '0' to return to login            |",
+           '-------------------------------------',
+              "| '++' to become a PLUS member      |",
+           '-------------------------------------',
+            '',
+           "NOTIFICATION: Don't forget to create a profile!",
+    
+            'Enter page you want to go to: ',
+                   
+         
+          
+    ]
+    mock_input_output_end()
 
 def test_NotificationForNewJob():
     nameofuser = "john++ le"
