@@ -1,7 +1,5 @@
-Student Learner	fdr++	test
 Student2 Learner2	fdr++	test
 Student3 Learner3	fdr++	test
 B L	fdr++	test
-BR LA	fdr++	test
 Guy GG++	fdr++	test
 US2 fdf++	fdr++	test

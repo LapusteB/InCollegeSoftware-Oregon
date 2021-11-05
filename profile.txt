@@ -1,8 +1,1 @@
-Student Learner	t	M 	U 	a
-
-Student2 Learner2	T	M 	U 	A
-
-BR LA	Title	Cs 	Usf 	...
-
-Guy GG++	Title	Majpr 	Usf 	df
-
+Student2 Learner2	title	Major 	University 	about me

@@ -599,3 +599,4 @@ def checkLastJobAppliedNotification(username,_aWeekFromDateApplied):
                 return True
 
     return False
+
