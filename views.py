@@ -6,6 +6,7 @@ import friend
 import friendList
 import mailbox
 import notifications
+import learning
 
 savedJobsMap = {}
 savedJobsList = []
@@ -49,6 +50,7 @@ def mainPage(nameofuser):
         print("| '6' to show your network          |")
         print("| '7' to show your friendList       |")
         print("| '8' to enter you mailbox          |")
+        print("| '9' to enter In College Learning  |")
         print("| '0' to return to login            |")
         print("-------------------------------------")
         if "++" not in name:
@@ -91,6 +93,8 @@ def mainPage(nameofuser):
             friendList.friendList1(name)
         elif(kbInput == "8"):
             mailbox.mailboxMenu(name)
+        elif(kbInput == "9"):
+            learning.learningMenu(name)    
         elif (kbInput == "++"):
             registerPlusUser(name)
         elif (kbInput == '0'):
