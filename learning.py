@@ -30,9 +30,18 @@ def learningMenu(name):
 
 def InCollegeLearning(name):
     if(taken_Incollege(name)):
-        decision = input("You have already taken this course, do you want to take it again?\n")
-        
+        decision = input("You have already taken this course, do you want to take it again? (y/n)\n")
+        if(decision == 'y'):
+            print("You have now completed this training\n")
+        elif(decision == 'n'):
+            print("Course Cancelled\n")
+        else:
+            print("Please enter valid input\n")
+
     else:
+        learningfile = open("learning.txt", 'a')
+        learningfile.write(name + '\t' + "How to use In College learning" + '\n')
+        learningfile.close()    
         print("You have now completed this training")
 
 def taken_Incollege(name):
@@ -46,29 +55,101 @@ def taken_Incollege(name):
     return False
 
 def Train(name):
-    if(taken_Incollege(name)):
+    if(taken_Train(name)):
         decision = input("You have already taken this course, do you want to take it again?\n")
-        
+        if(decision == 'y'):
+            print("You have now completed this training\n")
+        elif(decision == 'n'):
+            print("Course Cancelled\n")
+        else:
+            print("Please enter valid input\n")
     else:
+        learningfile = open("learning.txt", 'a')
+        learningfile.write(name + '\t' + "Train the trainer" + '\n')
+        learningfile.close()  
         print("You have now completed this training")
+
+def taken_Train(name):
+    
+    for line in open("learning.txt", "r"):
+        if line != '\n':
+            u, i = line.split('\t')
+            
+            if(u == name and i == "Train the trainer" + '\n'):
+                return True
+    return False
 
 def Gamification(name):
-    if(taken_Incollege(name)):
+    if(taken_Gamification(name)):
         decision = input("You have already taken this course, do you want to take it again?\n")
-        
+        if(decision == 'y'):
+            print("You have now completed this training\n")
+        elif(decision == 'n'):
+            print("Course Cancelled\n")
+        else:
+            print("Please enter valid input\n")
     else:
+        learningfile = open("learning.txt", 'a')
+        learningfile.write(name + '\t' + "Gamification of learning" + '\n')
+        learningfile.close()  
         print("You have now completed this training")
 
+def taken_Gamification(name):
+    
+    for line in open("learning.txt", "r"):
+        if line != '\n':
+            u, i = line.split('\t')
+            
+            if(u == name and i == "Gamification of learning" + '\n'):
+                return True
+    return False
+
 def Understanding(name):
-    if(taken_Incollege(name)):
+    if(taken_Understanding(name)):
         decision = input("You have already taken this course, do you want to take it again?\n")
-        
+        if(decision == 'y'):
+            print("You have now completed this training\n")
+        elif(decision == 'n'):
+            print("Course Cancelled\n")
+        else:
+            print("Please enter valid input\n")
     else:
+        learningfile = open("learning.txt", 'a')
+        learningfile.write(name + '\t' + "Understanding the Architectural desing Process" + '\n')
+        learningfile.close() 
         print("You have now completed this training")
+
+def taken_Understanding(name):
+    
+    for line in open("learning.txt", "r"):
+        if line != '\n':
+            u, i = line.split('\t')
+            
+            if(u == name and i == "Understanding the Architectural desing Process" + '\n'):
+                return True
+    return False
 
 def Project(name):
     if(taken_Incollege(name)):
         decision = input("You have already taken this course, do you want to take it again?\n")
-        
+        if(decision == 'y'):
+            print("You have now completed this training\n")
+        elif(decision == 'n'):
+            print("Course Cancelled\n")
+        else:
+            print("Please enter valid input\n")
     else:
+        learningfile = open("learning.txt", 'a')
+        learningfile.write(name + '\t' + "Project Management Simplified" + '\n')
+        learningfile.close() 
         print("You have now completed this training")
+
+def taken_Understanding(name):
+    
+    for line in open("learning.txt", "r"):
+        if line != '\n':
+            u, i = line.split('\t')
+            
+            if(u == name and i == "Project Management Simplified" + '\n'):
+                return True
+    return False
