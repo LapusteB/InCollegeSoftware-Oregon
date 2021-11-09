@@ -5,6 +5,7 @@ from views import mainPage
 from validatePass import validatePass
 import login
 import importantLinks
+import training
 
 class User:
 
@@ -39,6 +40,7 @@ def home(user):
                 print("| Press '2' to see a video of a successful student who used InCollege!   |")
                 print("| Press '3' to go to the 'Useful Links' page.                            |")
                 print("| Press '4' to go to the 'InCollege Important Links' page.               |")
+                print("| Press '5' to go to the 'Training' page.                                |")
                 print("| Press '0' to return to the Home menu.                                  |")
                 print("--------------------------------------------------------------------------")
                 b = input("What would you like to do: ")
@@ -53,6 +55,8 @@ def home(user):
                     usefulLinks.menu()
                 elif(b == "4"):
                     importantLinks.Menu()
+                elif b == "5":
+                    training.training_menu()
                 else:
                     print("Choose a valid option ")
 
