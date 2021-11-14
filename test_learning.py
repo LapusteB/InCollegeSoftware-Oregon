@@ -2,8 +2,10 @@ from testHelper import mock_input_output_end,mock_input_output_start,get_output,
 from testBase import messageNotification
 import testBase
 
+#Training option for many things to learn
 def test_learning_menu():
     mock_input_output_start()
+    
     learningMenu('')
 
     output = get_output()
@@ -43,6 +45,45 @@ def test_completed_courses():
     output = get_output()
     assert output == ["You have already taken this course, do you want to take it again?\n",
                       "You have now completed this training\n"]
+
+def test_options_for_Gamification():
+    file = open("learning.txt", "w")
+    file.write("test1	Gamification of learning\n")
+    file.close()
+
+    mock_input_output_start()
+    set_input(["y"])
+    Train('test')
+
+    output = get_output()
+    assert output == [
+                      "You have now completed this training"]
+
+def test_options_for_Training():
+    file = open("learning.txt", "w")
+    file.write("test1	Train the trainer\n")
+    file.close()
+
+    mock_input_output_start()
+    set_input(["y"])
+    Train('test')
+
+    output = get_output()
+    assert output == [
+                      "You have now completed this training"]
+
+def test_options_for_certain_skills():
+    file = open("learning.txt", "w")
+    file.write("test1	Understanding the Architectural desing Process\n")
+    file.close()
+
+    mock_input_output_start()
+    set_input(["y"])
+    Train('test')
+
+    output = get_output()
+    assert output == [
+                      "You have now completed this training"]
 
 def learningMenu(name):
     cmd = ''
