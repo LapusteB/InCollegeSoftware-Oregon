@@ -99,12 +99,26 @@ def output_training():
             wFile.write("=====" + '\n')
     wFile.close()
 
+def output_savedJobs():
+    wFile = open("MyCollege_savedJobs.txt", "w")  
+    with open("savedJobs.txt") as f:
+        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
+        
+        for k, g in groupby(lines, lambda L: L[0]):
+            lines = [el[1] for el in g]
+            lines.sort()
+            for li in lines:
+                wFile.write(li + '\n')
+            wFile.write("=====" + '\n')
+    wFile.close()
+
 def home(user):
     output_jobs()
     output_userProfiles()
     output_users()
     output_training()
-
+    output_savedJobs()
+    
     a = ""
     login.play_story()
 

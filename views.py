@@ -8,7 +8,7 @@ import mailbox
 import notifications
 import learning
 from Users import output_jobs
-
+from Users import output_savedJobs
 savedJobsMap = {}
 savedJobsList = []
 savedJobsListObj = []
@@ -400,6 +400,7 @@ def jobSearchPage():
                         file.write(obj.studentName + "\t" + obj.title + "\n")
                     
                     file.close()
+                    output_savedJobs()
                     print("Job saved!!!")
                     #update_jobs_appliedJobs_and_savedJobs()
                     printJob()
@@ -545,7 +546,7 @@ def deleteJOB():
     new_file.close()
     
     output_jobs()
-    
+
     print("-----JOB Deleted------\n")
 
 
