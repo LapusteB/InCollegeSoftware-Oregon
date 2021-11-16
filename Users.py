@@ -16,6 +16,19 @@ class User:
         self.password = password
         self.loggedIn = True
 
+def output_jobs():
+    aFile = open("jobs.txt", "r")
+    lines = aFile.readlines()
+    aFile.close()
+
+    wFile = open("MyCollege_jobs.txt", "w")    
+    for line in lines:
+        if line != '\n':
+            wFile.write(line)
+            wFile.write("=====" + '\n')
+    wFile.close()
+
+
 def output_userProfiles():
     aFile = open("profile.txt", "r")
     lines = aFile.readlines()
@@ -53,6 +66,7 @@ def output_training():
     wFile.close()
 
 def home(user):
+    output_jobs()
     output_userProfiles()
     output_users()
     output_training()
