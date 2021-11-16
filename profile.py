@@ -1,6 +1,6 @@
 from re import DOTALL
 import csv
-
+from Users import output_userProfiles
 
 class Profile:
     def __init__(self, name, title, major, university, about):
@@ -78,6 +78,7 @@ def profileMenu(username):
         addProfileParagraph(userProfile)
         addExperience(username)
         addEducation(username)
+        output_userProfiles()
 
     if len(profileList) == 0 or not profileExists:
         profileList.append(userProfile)
@@ -209,16 +210,22 @@ def showProfile(userProfile):
 
         if (cmd == '1'):
             addProfileTitle(userProfile)
+            output_userProfiles()
         elif (cmd == '2'):
             addProfileMajor(userProfile)
+            output_userProfiles()
         elif (cmd == '3'):
             addProfileUniversity(userProfile)
+            output_userProfiles()
         elif (cmd == '4'):
             addProfileParagraph(userProfile)
+            output_userProfiles()
         elif (cmd == '5'):
             addExperience(user)
+            output_userProfiles()
         elif (cmd == '6'):
             addEducation(user)
+            output_userProfiles()
         elif (cmd == '0'):
             return
         else:

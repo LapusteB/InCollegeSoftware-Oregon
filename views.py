@@ -7,6 +7,7 @@ import friendList
 import mailbox
 import notifications
 import learning
+from Users import output_jobs
 
 savedJobsMap = {}
 savedJobsList = []
@@ -153,6 +154,7 @@ def createNewJob():
     salary = input("Enter the salary for your job: ")
 
     saveJob(name, title, description, employer, location, salary)
+    output_jobs()
     newJobPosted(name, title)
     print("\nyour job has been saved")
     mainPage(name)
@@ -541,6 +543,8 @@ def deleteJOB():
         new_file.write(line)
 
     new_file.close()
+    
+    output_jobs()
     
     print("-----JOB Deleted------\n")
 
