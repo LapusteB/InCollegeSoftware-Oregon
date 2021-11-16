@@ -1,3 +1,5 @@
+from Users import output_training
+
 def learningMenu(name):
     cmd = ''
     while(cmd!='0'):
@@ -44,6 +46,7 @@ def InCollegeLearning(name):
         learningfile = open("learning.txt", 'a')
         learningfile.write(name + '\t' + "How to use In College learning" + '\n')
         learningfile.close()    
+        output_training()
         print("You have now completed this training")
 
 def taken_Incollege(name):
@@ -69,6 +72,7 @@ def Train(name):
         learningfile = open("learning.txt", 'a')
         learningfile.write(name + '\t' + "Train the trainer" + '\n')
         learningfile.close()  
+        output_training()
         print("You have now completed this training")
 
 def taken_Train(name):
@@ -93,7 +97,8 @@ def Gamification(name):
     else:
         learningfile = open("learning.txt", 'a')
         learningfile.write(name + '\t' + "Gamification of learning" + '\n')
-        learningfile.close()  
+        learningfile.close() 
+        output_training() 
         print("You have now completed this training")
 
 def taken_Gamification(name):
@@ -118,7 +123,8 @@ def Understanding(name):
     else:
         learningfile = open("learning.txt", 'a')
         learningfile.write(name + '\t' + "Understanding the Architectural desing Process" + '\n')
-        learningfile.close() 
+        learningfile.close()
+        output_training()
         print("You have now completed this training")
 
 def taken_Understanding(name):
@@ -143,7 +149,8 @@ def Project(name):
     else:
         learningfile = open("learning.txt", 'a')
         learningfile.write(name + '\t' + "Project Management Simplified" + '\n')
-        learningfile.close() 
+        learningfile.close()
+        output_training()
         print("You have now completed this training")
 
 def taken_Project(name):

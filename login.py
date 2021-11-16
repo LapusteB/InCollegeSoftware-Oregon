@@ -2,7 +2,7 @@ from validatePass import validatePass
 from views import mainPage
 import notifications
 import random
-
+from Users import output_users
 
 def login(user):
     print("--------------------------")
@@ -129,6 +129,7 @@ def register():
     file2.close()
     file3.close()
 
+    output_users()
     nameofuser = Fname + " " + Lname
     
     print("\nHello, " + Fname)
