@@ -7,8 +7,8 @@ import friendList
 import mailbox
 import notifications
 import learning
-from Users import output_jobs
-from Users import output_savedJobs
+#from Users import output_jobs
+#from Users import output_savedJobs
 savedJobsMap = {}
 savedJobsList = []
 savedJobsListObj = []
@@ -25,6 +25,33 @@ class savedJob:
     
     def __eq__(self,other):
         return self.studentName == other.studentName and self.title == other.title
+
+
+def output_savedJobs():
+    wFile = open("MyCollege_savedJobs.txt", "w")
+    with open("savedJobs.txt") as f:
+        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
+
+        for k, g in groupby(lines, lambda L: L[0]):
+            lines = [el[1] for el in g]
+            lines.sort()
+            for li in lines:
+                wFile.write(li + '\n')
+            wFile.write("=====" + '\n')
+    wFile.close()
+
+
+def output_jobs():
+    aFile = open("jobs.txt", "r")
+    lines = aFile.readlines()
+    aFile.close()
+
+    wFile = open("MyCollege_jobs.txt", "w")
+    for line in lines:
+        if line != '\n':
+            wFile.write(line)
+            wFile.write("=====" + '\n')
+    wFile.close()
 
 
 def mainPage(nameofuser):

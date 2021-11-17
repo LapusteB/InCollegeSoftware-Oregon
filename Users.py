@@ -6,7 +6,7 @@ from validatePass import validatePass
 import login
 import importantLinks
 import training
-from itertools import groupby
+import outputApi
 
 class User:
 
@@ -16,108 +16,13 @@ class User:
         self.password = password
         self.loggedIn = True
 
-def output_jobs():
-    aFile = open("jobs.txt", "r")
-    lines = aFile.readlines()
-    aFile.close()
-
-    wFile = open("MyCollege_jobs.txt", "w")    
-    for line in lines:
-        if line != '\n':
-            wFile.write(line)
-            wFile.write("=====" + '\n')
-    wFile.close()
-
-
-def output_userProfiles():
-    aFile = open("profile.txt", "r")
-    linea = aFile.readlines()
-    aFile.close()
-
-    bFile = open("profile_education.txt", "r")
-    lineb = bFile.readlines()
-    bFile.close()
-
-    cFile = open("profile_experience.txt", "r")
-    linec = cFile.readlines()
-    cFile.close()
-
-    wFile = open("profiletempFile.txt", "w")    
-    for line in linea:
-        if line != '\n':
-            wFile.write(line)
-    wFile.close()
-
-    wbFile = open("profiletempFile.txt", 'a')  
-    for line in lineb:
-        if line != '\n':
-            wbFile.write(line)
-            
-    wbFile.close()
-
-    wcFile = open("profiletempFile.txt", 'a') 
-    for line in linec:
-        if line != '\n':
-            wcFile.write(line)
-    wcFile.close()
-
-    wFile = open("MyCollege_profiles.txt", "w")  
-    with open("profiletempFile.txt") as f:
-        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
-        
-        for k, g in groupby(lines, lambda L: L[0]):
-            lines = [el[1] for el in g]
-            lines.sort()
-            for li in lines:
-                wFile.write(li)
-            wFile.write("=====" + '\n')
-    wFile.close()
-
-
-
-def output_users():
-    aFile = open("accounts.txt", "r")
-    lines = aFile.readlines()
-    aFile.close()
-
-    wFile = open("MyCollege_users.txt", "w")    
-    for line in lines:
-        if line != '\n':
-            wFile.write(line)
-    wFile.close()
-
-def output_training():
-    wFile = open("MyCollege_training.txt", "w")  
-    with open("learning.txt") as f:
-        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
-        
-        for k, g in groupby(lines, lambda L: L[0]):
-            lines = [el[1] for el in g]
-            lines.sort()
-            for li in lines:
-                wFile.write(li)
-            wFile.write("=====" + '\n')
-    wFile.close()
-
-def output_savedJobs():
-    wFile = open("MyCollege_savedJobs.txt", "w")  
-    with open("savedJobs.txt") as f:
-        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
-        
-        for k, g in groupby(lines, lambda L: L[0]):
-            lines = [el[1] for el in g]
-            lines.sort()
-            for li in lines:
-                wFile.write(li + '\n')
-            wFile.write("=====" + '\n')
-    wFile.close()
 
 def home(user):
-    output_jobs()
-    output_userProfiles()
-    output_users()
-    output_training()
-    output_savedJobs()
+    outputApi.output_jobs()
+    outputApi.output_userProfiles()
+    outputApi.output_users()
+    outputApi.output_training()
+    outputApi.output_savedJobs()
     
     a = ""
     login.play_story()

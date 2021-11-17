@@ -1,4 +1,4 @@
-from Users import output_training
+#from Users import output_training
 
 def learningMenu(name):
     cmd = ''
@@ -162,3 +162,17 @@ def taken_Project(name):
             if(u == name and i == "Project Management Simplified" + '\n'):
                 return True
     return False
+
+
+def output_training():
+    wFile = open("MyCollege_training.txt", "w")
+    with open("learning.txt") as f:
+        lines = ((line.split(None, 1)[:1], line) for line in f if line.strip())
+
+        for k, g in groupby(lines, lambda L: L[0]):
+            lines = [el[1] for el in g]
+            lines.sort()
+            for li in lines:
+                wFile.write(li)
+            wFile.write("=====" + '\n')
+    wFile.close()
