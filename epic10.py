@@ -227,7 +227,7 @@ def trainingAPI():
     else:
         return
 
-trainingAPI()
+#trainingAPI()
 
 
 
