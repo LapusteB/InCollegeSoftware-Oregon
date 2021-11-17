@@ -26,8 +26,8 @@ def training_menu():
             if line != '\n':
                 line = line.rstrip()
                 optionCounterList.append(counter)
-                print("| '" + counter +"' to go to '" + line + "'             |")
-        
+                print("| '" + str(counter) +"' to go to '" + line + "'             |")
+                counter+= 1
         f.close()
 
         print("| '0' to return to main page                        |")
@@ -42,8 +42,9 @@ def training_menu():
             BusinessAnalysis()
         elif (cmd == '4'):
             comingSoon()
-        elif (cmd in optionCounterList):
-            comingSoon()
+        elif cmd.isdigit():
+            if( int(cmd) in optionCounterList):
+                comingSoon()
         else:
             print("Invalid input, please try again")
             print("")
