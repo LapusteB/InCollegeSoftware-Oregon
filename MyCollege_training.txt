@@ -1,4 +1,4 @@
 test1	Understanding the Architectural desing Process
 =====
-test	Train the trainer
+test2	How to pass the class
 =====

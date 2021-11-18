@@ -1,2 +1,3 @@
-Student2 Learner2	title	Major 	University 	about meStudent2 Learner2   usf cs  2018
-Student2 Learner2   title   e   ds  de  l   d
+Student2 Learner2	title	Major	University	about me
+Student2 Learner2	usf	cs	2018
+Student2 Learner2	title	e	ds	de	l	d
