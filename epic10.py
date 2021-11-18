@@ -15,9 +15,7 @@ class studentInfo:
         self.lname = lname
         self.password = password
 
-
 def prep_studentAccounts_file():
-    print("")
     usrname = "kieu"
     fname = "van"
     lname = "le"
@@ -28,18 +26,14 @@ def prep_studentAccounts_file():
     f = open("studentAccounts.txt", "a")
     f.write(usrname +'\t' + fullname + '\n' + password +'\n' + "=====" + '\n')
 
-
+#---STUDENTACCOUNTAPI---
 def studentAccountAPI():
     path_to_file = "studentAccounts.txt"
-    file_exists = exists(path_to_file)
     usrname = ""
     fname = ""
     lname = ""
 
     studentInfoList = []
-
-    studentAddedCount = 0
-
     if(has_max_users()):
         print("System already has 10 users, can't add more from studentAccountsAPI")
         return
@@ -59,10 +53,7 @@ def studentAccountAPI():
                     student = studentInfo(usrname,fname,lname,password)
                     studentInfoList.append(student)
         f.close()
-    
-    #put in password file 
-    #put in username file
-    #put in account file
+
     usernamesFile = open("usernames.txt","a")
     namesFile = open("accounts.txt","a")
     passwordsFile = open("passwords.txt","a")
@@ -94,8 +85,8 @@ class newJobs:
 
 def prep_newJobsFile():
     
-    title = "job title"
-    description = "job desscription"
+    title = "job title2"
+    description = "job desscription1"
     #the end of multi-line des will be marked by a line
     poster_name = "van le"
     employer_name ="usf"
@@ -108,6 +99,7 @@ def prep_newJobsFile():
 
     multiLineDescriptionMarker = "&&&"
     f.close()
+
 
 def has_max_jobs():
     count = 0
@@ -122,12 +114,11 @@ def saveJob(n, t, d, e, l, s):
     file4.write(n + "\t" + t + "\t" + d + "\t" + e + "\t" + l + "\t" + s + "\n")
     file4.close()
 
+
 def testing():
     f = open("accounts.txt",'r')
     for line in f:
         print(line)
-
-#testing()
 
 def newJobPosted(username, title):
     file1 = open("accounts.txt", "r")
@@ -143,8 +134,8 @@ def newJobPosted(username, title):
     file1.close()
     file2.close()
 
-#put jobs in jobs and newJobPosted
-def jobsAPI():
+#-----NEWJOBSAPI
+def newJobsAPI():
     if(has_max_jobs()):
         print("Can't put more jobs from input API!!")
         return
@@ -153,6 +144,17 @@ def jobsAPI():
     file_exists = exists(path_to_file)
 
     newJobsList = []
+    jobsList = []
+
+    file = open('jobs.txt','r')
+    for line in file:
+        if line != '\n':
+            line = line.rstrip()
+            n, t, desscription, emp, loc, sal= line.split('\t')
+            jobsList.append(t)
+    file.close()
+            
+    
 
     if (exists(path_to_file)):
         #open file. 
@@ -162,8 +164,8 @@ def jobsAPI():
         f.close()
 
         
-        print(jobs)
-        print("separator")
+        #print(jobs)
+        #print("separator")
 
         for job in jobs:
             #f job != '\n' or job != '':
@@ -182,15 +184,14 @@ def jobsAPI():
 
                 jobObj = newJobs(title, des, poster, employer, location, salary)
                 newJobsList.append(jobObj)
-        
-        
 
     #saveJobs 
     for job in newJobsList:
         if(has_max_jobs()):
             return
-        saveJob(job.poster, job.title, job.des, job.employer, job.location, job.salary)
-        newJobPosted(job.poster, job.title)
+        if job.title not in jobsList:
+            saveJob(job.poster, job.title, job.des, job.employer, job.location, job.salary)
+            newJobPosted(job.poster, job.title)
     
     
 
@@ -210,6 +211,7 @@ def jobsAPI():
                 
             #         f.close()
 
+#----TRAININGAPI
 def trainingAPI():
     path_to_file = "newtraining.txt"
 
@@ -226,6 +228,70 @@ def trainingAPI():
         f2.close()
     else:
         return
+
+#APPLIEDJOBSAPI (3 FUNCTIONS)
+def apply_appliedJobsAPI(title, applicant, des):
+
+    #get name
+    f1 = open('accounts.txt','r')
+    accounts = f1.readlines()
+    f1.close()
+    #get username
+
+    usernameList = []
+    
+    f2 = open('usernames.txt','r')
+    usernames = f2.readlines()
+    for username in usernames:
+        usernameList.append(username.rstrip())
+    f2.close()
+
+    index = accounts.index(applicant + '\n')
+
+
+    file = open("MyCollege_appliedJobs.txt","a")
+    file.write(title + '\t' + usernameList[index] + '\t' + des + '\n' + "=====\n")
+    file.close()
+
+def post_appliedJobsAPI(title):
+    file = open("MyCollege_appliedJobs.txt","a")
+    file.write(title + '\n' + "=====\n")
+    file.close()
+
+def delete_appliedJobsAPI(title):
+
+    newer_appliedJobsList = []
+    file = open("MyCollege_appliedJobs.txt")
+    jobs = file.read().split("=====\n")
+    file.close()
+    #print(jobs)
+
+    
+
+    #job in mycollege: 
+    for job in jobs:
+        #if delete title not in job then append to list.
+        if job != '':
+            if (title + '\t') not in job and (title + '\n') not in job:
+                job = job + "=====\n"
+                newer_appliedJobsList.append(job)
+    #clear old file
+    open('MyCollege_appliedJobs.txt', 'w').close()
+
+    file = open("MyCollege_appliedJobs.txt","a")
+
+    #write new jobs in
+    for job in newer_appliedJobsList:
+        file.write(job)
+    file.close()
+
+#apply_appliedJobsAPI('title4',"john++ le",'des')
+#post_appliedJobsAPI('title3')
+#delete_appliedJobsAPI('title3')
+
+    
+        
+
 
 #trainingAPI()
 
@@ -247,6 +313,9 @@ def trainingAPI():
 #prep_studentAccounts_file()
 #studentAccountAPI()
 #print(studentAccountAPI())
+
+#apply_appliedJobsAPI('title',"john++ le",'des')
+
 
 
     
