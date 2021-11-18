@@ -7,6 +7,7 @@ import friendList
 import mailbox
 import notifications
 import learning
+import epic10
 #from Users import output_jobs
 #from Users import output_savedJobs
 savedJobsMap = {}
@@ -181,6 +182,7 @@ def createNewJob():
     salary = input("Enter the salary for your job: ")
 
     saveJob(name, title, description, employer, location, salary)
+    epic10.post_appliedJobsAPI(title)
     output_jobs()
     newJobPosted(name, title)
     print("\nyour job has been saved")
@@ -560,6 +562,7 @@ def deleteJOB():
                     n,t, start, end, des, e = l.split('\t')
                     # if the title is the same put in the appliedJobsDeleted
                     if t == sel:
+                        epic10.delete_appliedJobsAPI(t)
                         print("deleted")
                         job_got_deleted_notification(n,t)
                     
@@ -610,6 +613,7 @@ def jobApplication(title):
     
 
 def saveJobApp(name, title, g, s, d, dateApplied):
+    epic10.apply_appliedJobsAPI(title,name,d)
     file5 = open("appliedJobs.txt", "a")
     file5.write(str(name) + "\t" + str(title) + "\t"+ str(g)+ "\t"+ str(s)+ "\t"+ str(d)+ "\t" + str(dateApplied)+"\n" )
     file5.close()
