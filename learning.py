@@ -1,4 +1,6 @@
 #from Users import output_training
+from itertools import groupby
+
 
 def learningMenu(name):
     cmd = ''
