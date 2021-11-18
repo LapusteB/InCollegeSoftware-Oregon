@@ -518,8 +518,8 @@ def jobSearchPage():
         + "\n'3' to generate list of saved jobs or " + 
         " '4' to generate list of jobs that you have not applied yet: ")
         if a == "0":
-            mainPage(name)
-            #return
+            #mainPage(name)
+            return
         elif (a == "1"):
             postNewJob()
         elif (a == "2"):

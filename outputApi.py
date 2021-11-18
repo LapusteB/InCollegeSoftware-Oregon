@@ -95,6 +95,6 @@ def output_savedJobs():
             lines = [el[1] for el in g]
             lines.sort()
             for li in lines:
-                wFile.write(li + '\n')
+                wFile.write(li)
             wFile.write("=====" + '\n')
     wFile.close()
