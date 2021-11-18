@@ -8,6 +8,7 @@ import mailbox
 import notifications
 import learning
 import epic10
+from itertools import groupby
 #from Users import output_jobs
 #from Users import output_savedJobs
 savedJobsMap = {}
@@ -503,6 +504,7 @@ def jobSearchPage():
                         file.write(obj.studentName + "\t" + obj.title + "\n")
                         
                     file.close()
+                    output_savedJobs()
                     print("Job unmarked!!!")
 
                     #some not necessary though. 
