@@ -1,0 +1,6 @@
+title
+description&&&
+poster
+employer
+location
+salary
